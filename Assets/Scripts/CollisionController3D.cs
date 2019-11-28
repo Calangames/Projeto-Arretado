@@ -7,7 +7,7 @@ public class CollisionController3D : MonoBehaviour
     private BoxCollider col;
     private Vector2 drawStart, drawDirection;
     private Vector3 origin, dir, movement, colOffset, colHalfSize;
-    private float horizontalOffset, verticalOffset, horizontalMovement, verticalMovement;
+    private float hMovement, vMovement;
     private RaycastHit hit;
     private string[] collidersTagArray;
 
@@ -25,44 +25,28 @@ public class CollisionController3D : MonoBehaviour
     }
 
     public void CalculateMovement(float hInput, float vInput, float speed)
-    {
-        if (hInput != 0f)
-        {
-            horizontalOffset = colHalfSize.x * hInput;
-        }
-        else
-        {
-            horizontalOffset = 0f;
-        }
-        if (vInput != 0f)
-        {
-            verticalOffset = colHalfSize.z * vInput;
-        }
-        else
-        {
-            verticalOffset = 0f;
-        }
-        horizontalMovement = hInput * speed * Time.deltaTime;
-        verticalMovement = vInput * speed * Time.deltaTime;
+    {        
+        hMovement = hInput * speed * Time.deltaTime;
+        vMovement = vInput * speed * Time.deltaTime;
         dir = new Vector3(hInput, 0f, 0f);
         origin = transform.position + col.center;
-        Physics.BoxCast(origin, colHalfSize, dir, out hit, Quaternion.identity, Mathf.Abs(horizontalMovement));
+        Physics.BoxCast(origin, colHalfSize, dir, out hit, Quaternion.identity, Mathf.Abs(hMovement));
         CheckHorizontalHit();
 
         dir = new Vector3(0f, 0f, vInput);
-        origin += new Vector3(horizontalMovement, 0f, 0f);
-        Physics.BoxCast(origin, colHalfSize, dir, out hit, Quaternion.identity, Mathf.Abs(verticalMovement));
+        origin += new Vector3(hMovement, 0f, 0f);
+        Physics.BoxCast(origin, colHalfSize, dir, out hit, Quaternion.identity, Mathf.Abs(vMovement));
         CheckVerticalHit();
 
-        movement = new Vector3(horizontalMovement, 0f, verticalMovement);
+        movement = new Vector3(hMovement, 0f, vMovement);
         transform.position += movement;
     }
     
     private void CheckHorizontalHit()
     {
         if (hit.collider != null && IsSolid(hit))
-        {
-            horizontalMovement = 0f;
+        {            
+            hMovement = Mathf.Sign(hMovement) * Mathf.Max((Mathf.Abs(hit.point.x - origin.x) - colHalfSize.x - 0.011f), 0f);
         }
     }
 
@@ -70,7 +54,7 @@ public class CollisionController3D : MonoBehaviour
     {
         if (hit.collider != null && IsSolid(hit))
         {
-            verticalMovement = 0f;
+            vMovement = Mathf.Sign(vMovement) * Mathf.Max((Mathf.Abs(hit.point.z - origin.z) - colHalfSize.z - 0.011f), 0f);
         }
     }
 

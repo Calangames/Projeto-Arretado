@@ -21,9 +21,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {               
-        _collisionController = GetComponent<CollisionController3D>();
-        //_collisionController.DrawLineGizmo(true);
-        //_collisionController.CanPushObjects(false);
+        _collisionController = GetComponent<CollisionController3D>();        
         _collisionController.CollidersTagArray(collidersTagArray);
     }
 
