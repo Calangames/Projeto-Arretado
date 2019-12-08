@@ -187,6 +187,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2215945111020794633, guid: cdd39d2e0bf0e3b468b29143098dd468,
+        type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5013c1cbefb80c54085fe0be27415f27, type: 3}
+    - target: {fileID: 2215945111020794633, guid: cdd39d2e0bf0e3b468b29143098dd468,
+        type: 3}
+      propertyPath: sounds.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f28eb4538e7a3f4a8dc04d66177aa68, type: 3}
+    - target: {fileID: 2215945111020794633, guid: cdd39d2e0bf0e3b468b29143098dd468,
+        type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1265bcb6b327d414caf8f505283f93fb, type: 3}
+    - target: {fileID: 2215945111020794633, guid: cdd39d2e0bf0e3b468b29143098dd468,
+        type: 3}
+      propertyPath: sounds.Array.data[6].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215945111020794633, guid: cdd39d2e0bf0e3b468b29143098dd468,
+        type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215945111020794633, guid: cdd39d2e0bf0e3b468b29143098dd468,
+        type: 3}
+      propertyPath: sounds.Array.data[9].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215945111020794633, guid: cdd39d2e0bf0e3b468b29143098dd468,
+        type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: fba6f7ff8c8186240adc63ec862f1ca0, type: 3}
+    - target: {fileID: 2215945111020794633, guid: cdd39d2e0bf0e3b468b29143098dd468,
+        type: 3}
+      propertyPath: sounds.Array.data[7].volume
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd39d2e0bf0e3b468b29143098dd468, type: 3}
 --- !u!1 &81137409
@@ -206,7 +246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &81137410
 RectTransform:
   m_ObjectHideFlags: 0
@@ -330,17 +370,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Made with
-
-    Sprites made with
-
-    3D models made with
-
-    Music made with
-
-    Organized and Documented with
-
-    Communication facilitated by'
+  m_Text: "Feito com\nIlustra\xE7\xF5es feitas com\nModelos 3D feitos com\nM\xFAsica
+    feita com\nOrganizado e documentado com\nComunica\xE7\xE3o facilitada por"
 --- !u!222 &211863369
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -418,7 +449,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SPECIAL THANKS
+  m_Text: 
 --- !u!222 &238337447
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -573,7 +604,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ANIMATION & PROGRAMMING BY
+  m_Text: "ILUSTRA\xC7\xD5ES"
 --- !u!222 &388218734
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -812,7 +843,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SPRITES & 3D MODELS BY
+  m_Text: "SOM E M\xDASICA"
 --- !u!222 &406495020
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1223,8 +1254,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Freesound\nYouTube Audio Library\n\nOur friends, family and\r everyone
-    who supported us\r\nduring the development of this game\r"
+  m_Text: 
 --- !u!222 &664783674
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1356,7 +1386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -175, y: -200}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 102.2, y: 36.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &728492273
@@ -2157,7 +2187,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PROFESSIONAL GAMER
+  m_Text: JOGADOR
 --- !u!222 &1138459245
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2235,7 +2265,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EXECUTIVE PRODUCERS
+  m_Text: "PROGRAMA\xC7\xC3O"
 --- !u!222 &1162590505
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2312,7 +2342,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Lukas Paiva\nMaur\xEDcio Ramalho\nWesley Ronald"
+  m_Text: 'Rinaldo Klebson
+
+    Talbone'
 --- !u!222 &1255855236
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2389,7 +2421,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Maur\xEDcio Ramalho"
+  m_Text: 
 --- !u!222 &1399581511
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2565,7 +2597,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Spooky Station
+  m_Text: Wesley Ronald
 --- !u!222 &1406713827
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2642,7 +2674,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The Player
+  m_Text: "Voc\xEA"
 --- !u!222 &1423370293
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2720,7 +2752,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ART DIRECTION BY
+  m_Text: MODELOS 3D
 --- !u!222 &1507453701
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2797,7 +2829,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lukas Paiva
+  m_Text: "Maur\xEDcio Ramalho"
 --- !u!222 &1591292383
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2914,7 +2946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1634120842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3038,7 +3070,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wesley Ronald
+  m_Text: Lukas Paiva
 --- !u!222 &1636520459
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3064,7 +3096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1645610230
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3427,7 +3459,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MUSIC BY
+  m_Text: 
 --- !u!222 &1959190505
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3504,9 +3536,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Lukas Paiva
-
-    Talissa Bordonalli'
+  m_Text: Wendell Paulino
 --- !u!222 &2006002682
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3657,7 +3687,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: WRITTEN & DIRECTED BY
+  m_Text: GAME DESIGN
 --- !u!222 &2119420723
 CanvasRenderer:
   m_ObjectHideFlags: 0
