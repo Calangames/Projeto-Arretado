@@ -3,7 +3,12 @@ guid: 3544ad01b3687b242b86333261ce7e27
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_luminaria
+    second: {fileID: 2100000, guid: faf4467ad88f3e44b8b5f7be9ffd4dc8, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
