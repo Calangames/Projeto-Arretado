@@ -21,7 +21,7 @@ public class Shoot : MonoBehaviour
 
     private FirstPersonController firstPersonController;
     private LayerMask layerMask;
-    private bool firing1, firing2, pressingEsc, pressingDiary, paused = false, fedFish, pettedDoggie, kissed, masked, ended, armed, cleaned, red;
+    private bool firing1, pressingEsc, pressingDiary, paused = false, fedFish, pettedDoggie, kissed, masked, ended, armed, cleaned, red;
     private enum NextStep
     {
         Iracema =1, Sandoval =2, EntraQuarto =4, FechaPorta = 8
@@ -140,7 +140,7 @@ public class Shoot : MonoBehaviour
                     {
                         HideMouseHUD();
                     }
-                    if (Input.GetAxisRaw("Fire1") == 1 && !firing1 && !MonologueManager.instance.Running)
+                    if (Input.GetAxisRaw("Fire1") == 1 && !firing1 /*&& !MonologueManager.instance.Running*/)
                     {
                         firing1 = true;
                         int interactableId = hit.transform.gameObject.GetInstanceID();
@@ -152,10 +152,11 @@ public class Shoot : MonoBehaviour
                                     //AudioSource doggieAudioSource = doggie.GetComponent<AudioSource>();
                                     //doggieAudioSource.Play();
 
-                                    if (MonologueManager.instance.Running && MonologueManager.instance.InteractableId == hitId)
+                                    if (MonologueManager.instance.Running)
                                     {
                                         if (MonologueManager.instance.Sentences.Count == 0)
                                         {
+                                            firstPersonController.Locked = false;
                                             nextStep = NextStep.Sandoval;
                                         }
                                         MonologueManager.instance.DisplayNextSentence();
@@ -163,6 +164,7 @@ public class Shoot : MonoBehaviour
                                     else
                                     {
                                         MonologueManager.instance.StartMonologue(iracemaSemChave);
+                                        firstPersonController.Locked = true;
                                     }
                                 }
                                 break;
@@ -368,30 +370,7 @@ public class Shoot : MonoBehaviour
                             }                           
                         }
                         */
-                    }
-                    else if (Input.GetAxisRaw("Fire2") == 1 && !firing2)
-                    {
-                        firing2 = true;
-                        if (hit.transform)
-                        {
-                            if (hit.transform.CompareTag("Interactable"))
-                            {
-                                if (MonologueManager.instance.Running && MonologueManager.instance.InteractableId == hit.transform.gameObject.GetInstanceID())
-                                {
-                                    if (MonologueManager.instance.Sentences.Count == 0)
-                                    {
-                                        firstPersonController.Locked = false;
-                                    }
-                                    MonologueManager.instance.DisplayNextSentence();
-                                }
-                                else
-                                {
-                                    MonologueManager.instance.StartMonologue(hit.transform.gameObject.GetInstanceID());
-                                }
-                                return;
-                            }
-                        }
-                    }
+                    }                    
                 }
                 else if (hit.transform.CompareTag("Door"))
                 {
@@ -479,10 +458,6 @@ public class Shoot : MonoBehaviour
             if (Input.GetAxisRaw("Fire1") == 0)
             {
                 firing1 = false;
-            }
-            if (Input.GetAxisRaw("Fire2") == 0)
-            {
-                firing2 = false;
             }
         }
         else
