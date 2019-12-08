@@ -89,7 +89,7 @@ public class MenuController : MonoBehaviour
     private IEnumerator FadeFromBlack()
     {
         EventSystem.current.sendNavigationEvents = false;
-        //EventSystem.current.SetSelectedGameObject(startButton.gameObject);
+        EventSystem.current.SetSelectedGameObject(startButton.gameObject);
         fade.color = Color.black;
         for (int i = 5; i > 0; i--)
         {

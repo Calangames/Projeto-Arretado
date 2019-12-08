@@ -70,34 +70,11 @@ public class Shoot : MonoBehaviour
                 }
             }
 
-            if (Input.GetAxisRaw("Cancel") == 1f)
-            {
-                if (!pressingEsc)
-                {
-                    pressingEsc = true;
-                    if (Interface.instance.achievements.activeSelf)
-                    {
-                        Interface.instance.achievements.SetActive(false);
-                        Interface.instance.vignette.SetActive(true);
-                        if (!MonologueManager.instance.Running)
-                        {
-                            firstPersonController.Locked = false;
-                            Cursor.lockState = CursorLockMode.None;
-                        }                        
-                        Cursor.visible = false;
-                        paused = false;
-                    }
-                    else
-                    {
-                        EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
-                        Interface.instance.achievements.SetActive(true);
-                        Interface.instance.vignette.SetActive(false);
-                        firstPersonController.Locked = true;
-                        Cursor.lockState = CursorLockMode.None;
-                        Cursor.visible = false;
-                        paused = true;
-                    }
-                }
+            if (Input.GetAxisRaw("Cancel") == 1f && !pressingEsc)
+            {	
+		pressingEsc = true;
+		Interface.instance.Menu();	
+                
             }
             else
             {
