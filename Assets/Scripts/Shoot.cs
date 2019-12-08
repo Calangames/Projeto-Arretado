@@ -8,6 +8,7 @@ public class Shoot : MonoBehaviour
     [Range(0f, 10f)]
     public float maxDistance = 5f;
     public GameObject ending;
+    public GameObject iracema;
     //public GameObject doggie, fishBowl, fishFood, shower, skeleton, serial, milk, bowl, cerealBowCanvas, bathroomFaucet, sinkFaucet, wife, mask, arms, chainsaw, sword, car, mirrorJacket, mirrorMask;
     //public Vector3 bowlSinkPosition;
     //public ParticleSystem showerWater, bathroomFaucetWater, sinkFaucetWater;
@@ -15,14 +16,17 @@ public class Shoot : MonoBehaviour
     //public Transform bedroomDoor, bathroomDoor, closetDoor, kitchenDoor, tvDoor, garageDoor, outsideDoor, fridgeDoor1, fridgeDoor2;
     public int lockedCounter = 0;
 
+    [TextArea(1, 10)]
+    public string[] iracemaSemChave;
+
     private FirstPersonController firstPersonController;
     private LayerMask layerMask;
-    private bool firing1, firing2, pressingEsc, pressingDiary, paused = false, fedFish, pettedDoggie, kissed, masked, ended, armed, cleaned, blue, red;
+    private bool firing1, firing2, pressingEsc, pressingDiary, paused = false, fedFish, pettedDoggie, kissed, masked, ended, armed, cleaned, red;
     private enum NextStep
     {
-        Shower =1, ChangeClothes =2, Serial =4, Milk = 8, Eat = 16, MaskAndWeapons = 32, DriveOff = 64
+        Iracema =1, Sandoval =2, EntraQuarto =4, FechaPorta = 8
     };
-    private NextStep nextStep = NextStep.Shower;
+    private NextStep nextStep = NextStep.Iracema;
     //private Door[] doors = new Door[9];
 
     void Start()
@@ -120,32 +124,12 @@ public class Shoot : MonoBehaviour
                     {
                         if (/* hitId != car.GetInstanceID() || */ !ended)
                         {
-                            Interface.instance.redActionImage.sprite = MonologueManager.instance.RedAction(hitId);
-                            red = Interface.instance.redActionImage.sprite != null;
-                            Interface.instance.redActionImage.enabled = red;
+                            //Interface.instance.redActionImage.sprite = MonologueManager.instance.RedAction(hitId);
+                            //red = Interface.instance.redActionImage.sprite != null;
+                            //Interface.instance.redActionImage.enabled = red;
 
                             CheckBlueAndChangeSprite(hitId);
-                            if (blue)
-                            {
-                                if (red)
-                                {
-                                    Interface.instance.mouseHudImage.sprite = Interface.instance.mouseBoth;
-                                }
-                                else
-                                {
-                                    Interface.instance.mouseHudImage.sprite = Interface.instance.mouseBlue;
-                                }
-                                Interface.instance.mouseHudImage.enabled = true;
-                            }
-                            else if (red)
-                            {
-                                Interface.instance.mouseHudImage.sprite = Interface.instance.mouseRed;
-                                Interface.instance.mouseHudImage.enabled = true;
-                            }
-                            else
-                            {
-                                Interface.instance.mouseHudImage.enabled = false;
-                            }
+                            Interface.instance.mouseHudImage.enabled = red;
                         }
                         else
                         {
@@ -159,18 +143,32 @@ public class Shoot : MonoBehaviour
                     if (Input.GetAxisRaw("Fire1") == 1 && !firing1 && !MonologueManager.instance.Running)
                     {
                         firing1 = true;
-                        /*
                         int interactableId = hit.transform.gameObject.GetInstanceID();
-                        if (interactableId == doggie.GetInstanceID())
+                        switch (nextStep)
                         {
-                            if (!pettedDoggie)
-                            {
-                                AudioSource doggieAudioSource = doggie.GetComponent<AudioSource>();
-                                doggieAudioSource.Play();
-                                pettedDoggie = true;
-                                Interface.instance.OhHiDoggy();
-                            }
+                            case NextStep.Iracema:
+                                if (interactableId == iracema.GetInstanceID())
+                                {
+                                    //AudioSource doggieAudioSource = doggie.GetComponent<AudioSource>();
+                                    //doggieAudioSource.Play();
+
+                                    if (MonologueManager.instance.Running && MonologueManager.instance.InteractableId == hitId)
+                                    {
+                                        if (MonologueManager.instance.Sentences.Count == 0)
+                                        {
+                                            nextStep = NextStep.Sandoval;
+                                        }
+                                        MonologueManager.instance.DisplayNextSentence();
+                                    }
+                                    else
+                                    {
+                                        MonologueManager.instance.StartMonologue(iracemaSemChave);
+                                    }
+                                }
+                                break;
                         }
+                                
+                        /*
                         else if (interactableId == wife.GetInstanceID())
                         {
                             if (!kissed)
@@ -370,7 +368,7 @@ public class Shoot : MonoBehaviour
                             }                           
                         }
                         */
-                    }                    
+                    }
                     else if (Input.GetAxisRaw("Fire2") == 1 && !firing2)
                     {
                         firing2 = true;
@@ -495,13 +493,17 @@ public class Shoot : MonoBehaviour
 
     private void CheckBlueAndChangeSprite(int hitId)
     {
-        /*
-        if (doggie.GetInstanceID() == hitId && !pettedDoggie)
+        
+        if (iracema.GetInstanceID() == hitId)
         {
-            Interface.instance.blueActionImage.sprite = Interface.instance.bluePet;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
+            if (nextStep == NextStep.Iracema) 
+            {
+                Interface.instance.redActionImage.sprite = Interface.instance.blueFalar;
+                Interface.instance.redActionImage.enabled = true;
+                red = true;
+            }            
         }
+        /*
         else if ((fishBowl.GetInstanceID() == hitId || fishFood.GetInstanceID() == hitId) && !fedFish)
         {
             Interface.instance.blueActionImage.sprite = Interface.instance.blueUse;
@@ -593,11 +595,9 @@ public class Shoot : MonoBehaviour
 
     private void HideMouseHUD()
     {
-        Interface.instance.blueActionImage.enabled = false;
-        Interface.instance.mouseHudImage.enabled = false;
         Interface.instance.redActionImage.enabled = false;
+        Interface.instance.mouseHudImage.enabled = false;
         red = false;
-        blue = false;
     }
 
     private void UnlockCharacter()

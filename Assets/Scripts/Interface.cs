@@ -9,11 +9,11 @@ public class Interface : MonoBehaviour
 {
     public static Interface instance = null;
 
-    public Image redActionImage, blueActionImage, mouseHudImage;
+    public Image redActionImage, mouseHudImage;
 
     public GameObject achievements, vignette;
 
-    public Sprite blueOpen, blueKiss, bluePet, blueUse, blueEat, blueClose, blueTake, mouseBlue, mouseBoth, mouseRed;
+    public Sprite blueAbrir, blueFalar, blueOlhar, blueUsar, blueFechar, bluePegar;
 
     void Awake()
     {
