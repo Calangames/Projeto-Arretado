@@ -10,12 +10,10 @@ public class Diary : MonoBehaviour
     public GameObject diaryObject, objectiveHUD;
 
     public Image diaryInterface, wakeSlash, cerealSlash, maskSlash, toolsSlash, showerSlash, jacketSlash, carSlash;
-    public Image wakeSlash_pt_br, maskSlash_pt_br, toolsSlash_pt_br, showerSlash_pt_br, jacketSlash_pt_br, carSlash_pt_br;
 
     public RectTransform hudSlash;
 
     public Sprite wakeHud, cerealHud, maskHud, toolsHud, showerHud, jacketHud, carHud;
-    public Sprite wakeHud_pt_br, maskHud_pt_br, toolsHud_pt_br, showerHud_pt_br, jacketHud_pt_br, carHud_pt_br;
 
     public AnimationClip objectiveHudCrossClip;
 
@@ -116,12 +114,6 @@ public class Diary : MonoBehaviour
         showerSlash.enabled = true;
         jacketSlash.enabled = true;
         carSlash.enabled = true;
-        wakeSlash_pt_br.enabled = true;
-        maskSlash_pt_br.enabled = true;
-        toolsSlash_pt_br.enabled = true;
-        showerSlash_pt_br.enabled = true;
-        jacketSlash_pt_br.enabled = true;
-        carSlash_pt_br.enabled = true;
     }
 
     public void Hide()
@@ -134,11 +126,5 @@ public class Diary : MonoBehaviour
         showerSlash.enabled = false;
         jacketSlash.enabled = false;
         carSlash.enabled = false;
-        wakeSlash_pt_br.enabled = false;
-        maskSlash_pt_br.enabled = false;
-        toolsSlash_pt_br.enabled = false;
-        showerSlash_pt_br.enabled = false;
-        jacketSlash_pt_br.enabled = false;
-        carSlash_pt_br.enabled = false;
     }
 }

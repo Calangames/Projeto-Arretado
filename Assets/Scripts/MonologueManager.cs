@@ -6,7 +6,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class MonologueManager : MonoBehaviour
 {
-	public Text dialogueText;
+	public TMPro.TextMeshProUGUI dialogueText;
 	public Animator animator;
 
     public static MonologueManager instance = null;
@@ -20,7 +20,7 @@ public class MonologueManager : MonoBehaviour
     public bool Typing { get; set; }
     public int InteractableId { get; set; }
 
-    private WaitForSeconds delay = new WaitForSeconds(0.03f);
+    private WaitForSeconds delay = new WaitForSeconds(0.01f);
     private FirstPersonController firstPersonController;
 
     void Awake()
@@ -133,7 +133,7 @@ public class MonologueManager : MonoBehaviour
                     newText += letters[i];
                     dialogueText.text = previousText + openingTag + newText + closingTag;
                     i++;
-                    yield return delay;
+                    yield return null;
                 }
                 i = richTextIndex;
                 richTextIndex = sentence.IndexOf('<', richTextIndex + 1);
@@ -141,7 +141,7 @@ public class MonologueManager : MonoBehaviour
             else 
             {
                 dialogueText.text += letters[i];
-                yield return delay;
+                yield return null;
             }
 			
 		}

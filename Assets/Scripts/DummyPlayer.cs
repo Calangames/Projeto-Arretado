@@ -17,7 +17,7 @@ public class DummyPlayer : MonoBehaviour
 
     private Animator _animator;
     private Quaternion m_DummyHorizontalRot, m_DummyVerticalRot;
-    private bool firing1, firing2, hitAlarm, canTurnHead, blue, red, stopHidingHUD;
+    private bool firing1, firing2, hitAlarm, canTurnHead, stopHidingHUD;
     private float maxDistance = 5f;
     private LayerMask mask;
 
@@ -72,34 +72,16 @@ public class DummyPlayer : MonoBehaviour
                         {
                             Interface.instance.redActionImage.sprite = MonologueManager.instance.RedAction(hitId);
                             Interface.instance.redActionImage.enabled = true;
-                            red = true;
                             if (alarmClock.GetInstanceID() == hitId)
                             {
-                                Interface.instance.blueActionImage.enabled = true;
-                                blue = true;
+                                Interface.instance.redActionImage.enabled = true;
                             }
                             else
                             {
-                                Interface.instance.blueActionImage.enabled = false;
-                                blue = false;
+                                Interface.instance.redActionImage.enabled = false;
                             }
 
                             Interface.instance.mouseHudImage.enabled = true;
-                            if (blue)
-                            {
-                                if (red)
-                                {
-                                    Interface.instance.mouseHudImage.sprite = Interface.instance.mouseBoth;
-                                }
-                                else
-                                {
-                                    Interface.instance.mouseHudImage.sprite = Interface.instance.mouseBlue;
-                                }
-                            }
-                            else if (red)
-                            {
-                                Interface.instance.mouseHudImage.sprite = Interface.instance.mouseRed;
-                            }
                         }
                         else
                         {
@@ -172,11 +154,8 @@ public class DummyPlayer : MonoBehaviour
 
     private void HideMouseHUD()
     {
-        Interface.instance.blueActionImage.enabled = false;
-        Interface.instance.mouseHudImage.enabled = false;
         Interface.instance.redActionImage.enabled = false;
-        red = false;
-        blue = false;
+        Interface.instance.mouseHudImage.enabled = false;
     }
 
     public void Wake()
