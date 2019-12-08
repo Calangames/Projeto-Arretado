@@ -133,7 +133,7 @@ public class MonologueManager : MonoBehaviour
                     newText += letters[i];
                     dialogueText.text = previousText + openingTag + newText + closingTag;
                     i++;
-                    yield return new WaitForEndOfFrame();
+                    yield return null;
                 }
                 i = richTextIndex;
                 richTextIndex = sentence.IndexOf('<', richTextIndex + 1);
@@ -141,7 +141,7 @@ public class MonologueManager : MonoBehaviour
             else 
             {
                 dialogueText.text += letters[i];
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
 			
 		}
