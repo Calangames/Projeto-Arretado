@@ -7532,7 +7532,7 @@ MonoBehaviour:
   - iGameObject: {fileID: 1218342325}
     sentences:
     - Oh shit
-    - Here we go again
+    - Here we <color=#FF0000>go</color> again
     redAction: {fileID: 21300000, guid: 9dec239259f496b488560951e1bb6755, type: 3}
 --- !u!4 &1277341652
 Transform:
@@ -11607,7 +11607,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

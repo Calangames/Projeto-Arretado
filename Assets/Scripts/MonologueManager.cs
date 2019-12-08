@@ -20,7 +20,7 @@ public class MonologueManager : MonoBehaviour
     public bool Typing { get; set; }
     public int InteractableId { get; set; }
 
-    private WaitForSeconds delay = new WaitForSeconds(0.1f);
+    private WaitForSeconds delay = new WaitForSeconds(0.03f);
     private FirstPersonController firstPersonController;
 
     void Awake()
@@ -111,12 +111,40 @@ public class MonologueManager : MonoBehaviour
 	{
         Typing = true;
 		dialogueText.text = "";
-		foreach (char letter in sentence.ToCharArray()) 
-		{
-			dialogueText.text += letter;
-			yield return null;
-		}
+        int richTextIndex = sentence.IndexOf('<');
+        char[] letters = sentence.ToCharArray();
         yield return delay;
+        for (int i = 0; i < sentence.Length; i++) 
+		{
+            if (richTextIndex > -1 && i == richTextIndex) 
+            {
+                //needs multi tag support
+                string previousText = dialogueText.text;
+                richTextIndex = sentence.IndexOf('>', richTextIndex + 1);
+                string openingTag = sentence.Substring(i, richTextIndex - i);
+                i = richTextIndex++;
+                richTextIndex = sentence.IndexOf("</", richTextIndex + 1);
+                int j = richTextIndex;
+                richTextIndex = sentence.IndexOf('>', richTextIndex + 1);
+                string closingTag = sentence.Substring(j, richTextIndex + 1 - j);
+                string newText = "";
+                while (i < j)
+                {
+                    newText += letters[i];
+                    dialogueText.text = previousText + openingTag + newText + closingTag;
+                    i++;
+                    yield return delay;
+                }
+                i = richTextIndex;
+                richTextIndex = sentence.IndexOf('<', richTextIndex + 1);
+            }
+            else 
+            {
+                dialogueText.text += letters[i];
+                yield return delay;
+            }
+			
+		}
         Typing = false;
     }
 
