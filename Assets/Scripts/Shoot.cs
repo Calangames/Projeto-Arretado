@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.EventSystems;
@@ -8,7 +9,7 @@ public class Shoot : MonoBehaviour
     [Range(0f, 10f)]
     public float maxDistance = 5f;
     public GameObject ending;
-    public GameObject iracema;
+    public GameObject jucilene, iracema;
     //public GameObject doggie, fishBowl, fishFood, shower, skeleton, serial, milk, bowl, cerealBowCanvas, bathroomFaucet, sinkFaucet, wife, mask, arms, chainsaw, sword, car, mirrorJacket, mirrorMask;
     //public Vector3 bowlSinkPosition;
     //public ParticleSystem showerWater, bathroomFaucetWater, sinkFaucetWater;
@@ -17,16 +18,16 @@ public class Shoot : MonoBehaviour
     public int lockedCounter = 0;
 
     [TextArea(1, 10)]
-    public string[] iracemaSemChave;
+    public string[] jucileneBemVindo, iracemaSemChave;
 
     private FirstPersonController firstPersonController;
     private LayerMask layerMask;
     private bool firing1, pressingEsc, pressingDiary, paused = false, fedFish, pettedDoggie, kissed, masked, ended, armed, cleaned, red;
     private enum NextStep
     {
-        Iracema =1, Sandoval =2, EntraQuarto =4, FechaPorta = 8
+        Jucilene = 1, Iracema =2, Sandoval =4, EntraQuarto =8, FechaPorta = 16
     };
-    private NextStep nextStep = NextStep.Iracema;
+    private NextStep nextStep = NextStep.Jucilene;
     //private Door[] doors = new Door[9];
 
     void Start()
@@ -34,6 +35,9 @@ public class Shoot : MonoBehaviour
         layerMask = LayerMask.GetMask("Default");
         firstPersonController = GetComponent<FirstPersonController>();
         MonologueManager.instance.FirstPersonController(firstPersonController);
+        
+        firstPersonController.Locked = true;
+        //StartCoroutine(WaitAndTalk());
         //doors[0] = new Door(bedroomDoor.GetChild(0).gameObject);
         //doors[1] = new Door(bathroomDoor.GetChild(0).gameObject, true);
         //doors[2] = new Door(closetDoor.GetChild(0).gameObject);
@@ -43,6 +47,15 @@ public class Shoot : MonoBehaviour
         //doors[6] = new Door(outsideDoor.GetChild(0).gameObject);
         //doors[7] = new Door(fridgeDoor1.gameObject, true);
         //doors[8] = new Door(fridgeDoor2.gameObject, true);
+    }
+
+    private IEnumerator WaitAndTalk()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (!MonologueManager.instance.Running)
+        {
+            MonologueManager.instance.StartMonologue(jucileneBemVindo);
+        }
     }
 
     void LateUpdate()
@@ -70,34 +83,10 @@ public class Shoot : MonoBehaviour
                 }
             }
 
-            if (Input.GetAxisRaw("Cancel") == 1f)
-            {
-                if (!pressingEsc)
-                {
-                    pressingEsc = true;
-                    if (Interface.instance.achievements.activeSelf)
-                    {
-                        Interface.instance.achievements.SetActive(false);
-                        Interface.instance.vignette.SetActive(true);
-                        if (!MonologueManager.instance.Running)
-                        {
-                            firstPersonController.Locked = false;
-                            Cursor.lockState = CursorLockMode.None;
-                        }                        
-                        Cursor.visible = false;
-                        paused = false;
-                    }
-                    else
-                    {
-                        EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
-                        Interface.instance.achievements.SetActive(true);
-                        Interface.instance.vignette.SetActive(false);
-                        firstPersonController.Locked = true;
-                        Cursor.lockState = CursorLockMode.None;
-                        Cursor.visible = false;
-                        paused = true;
-                    }
-                }
+            if (Input.GetAxisRaw("Cancel") == 1f && !pressingEsc)
+            {	
+		        pressingEsc = true;
+                Interface.instance.Menu();
             }
             else
             {
@@ -146,6 +135,28 @@ public class Shoot : MonoBehaviour
                         int interactableId = hit.transform.gameObject.GetInstanceID();
                         switch (nextStep)
                         {
+                            case NextStep.Jucilene:
+                                if (interactableId == jucilene.GetInstanceID())
+                                {
+                                    //AudioSource doggieAudioSource = doggie.GetComponent<AudioSource>();
+                                    //doggieAudioSource.Play();
+
+                                    if (MonologueManager.instance.Running)
+                                    {
+                                        if (MonologueManager.instance.Sentences.Count == 0)
+                                        {
+                                            firstPersonController.Locked = false;
+                                            nextStep = NextStep.Iracema;
+                                        }
+                                        MonologueManager.instance.DisplayNextSentence();
+                                    }
+                                    else
+                                    {
+                                        MonologueManager.instance.StartMonologue(jucileneBemVindo);
+                                        firstPersonController.Locked = true;
+                                    }
+                                }
+                                break;
                             case NextStep.Iracema:
                                 if (interactableId == iracema.GetInstanceID())
                                 {
@@ -468,7 +479,15 @@ public class Shoot : MonoBehaviour
 
     private void CheckBlueAndChangeSprite(int hitId)
     {
-        
+        if (jucilene.GetInstanceID() == hitId)
+        {
+            if (nextStep == NextStep.Jucilene)
+            {
+                Interface.instance.redActionImage.sprite = Interface.instance.blueFalar;
+                Interface.instance.redActionImage.enabled = true;
+                red = true;
+            }
+        }
         if (iracema.GetInstanceID() == hitId)
         {
             if (nextStep == NextStep.Iracema) 
