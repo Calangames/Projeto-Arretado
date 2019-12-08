@@ -7605,7 +7605,7 @@ MonoBehaviour:
     sentences:
     - Oh shit
     - Here we <color=#FF0000>go</color> again
-    redAction: {fileID: 21300000, guid: 9dec239259f496b488560951e1bb6755, type: 3}
+    redAction: {fileID: 21300000, guid: 0b4745b4a8fba0f49a80ab87b8592508, type: 3}
 --- !u!4 &1277341652
 Transform:
   m_ObjectHideFlags: 0
@@ -9158,40 +9158,16 @@ MonoBehaviour:
   mouseHudImage: {fileID: 2068339446}
   achievements: {fileID: 1860108187}
   vignette: {fileID: 257359232}
-  blueOpen: {fileID: 21300000, guid: 2328af357ce93f84cbb008af51fb4aac, type: 3}
-  blueKiss: {fileID: 21300000, guid: 96328a341815ba343af21a5943bc1094, type: 3}
-  bluePet: {fileID: 21300000, guid: 17fe004d8952c2842a54a9ac0ac05670, type: 3}
-  blueUse: {fileID: 21300000, guid: c56e51c851b012b4bb4612abee272fe1, type: 3}
-  blueEat: {fileID: 21300000, guid: 4202ef2330092ba4ca512c35ebf07fab, type: 3}
-  blueClose: {fileID: 21300000, guid: a8d978f4370e60842b65c53f4bf5f874, type: 3}
-  blueTake: {fileID: 21300000, guid: 33380fb7a0e5bdc4e8cb509da96eaba6, type: 3}
+  blueOpen: {fileID: 21300000, guid: 2861bb3406fecfd4291684bfb51f5c15, type: 3}
+  blueKiss: {fileID: 21300000, guid: 2861bb3406fecfd4291684bfb51f5c15, type: 3}
+  bluePet: {fileID: 21300000, guid: 2861bb3406fecfd4291684bfb51f5c15, type: 3}
+  blueUse: {fileID: 21300000, guid: 4c2127ead0b5e1345a3b3fa71c02fca7, type: 3}
+  blueEat: {fileID: 21300000, guid: 2861bb3406fecfd4291684bfb51f5c15, type: 3}
+  blueClose: {fileID: 21300000, guid: 7c93ff4eb155ce244850cb0f3ed631a4, type: 3}
+  blueTake: {fileID: 21300000, guid: 10bd061996b77994a9961adefcaf3844, type: 3}
   mouseBlue: {fileID: 21300000, guid: 8756790a983b22a4a9a7034014f40b8f, type: 3}
   mouseBoth: {fileID: 21300000, guid: e4bb1efb47ff7df40a92e86db02a98cb, type: 3}
   mouseRed: {fileID: 21300000, guid: 75822d7f924330b42a0ed34569bf876f, type: 3}
-  blueOpen_pt_br: {fileID: 256089649471689878, guid: 37854ca7953bd6545ae91eecde7a7e23,
-    type: 3}
-  blueKiss_pt_br: {fileID: 3035027050814689554, guid: 37854ca7953bd6545ae91eecde7a7e23,
-    type: 3}
-  bluePet_pt_br: {fileID: -7200457715687555955, guid: 37854ca7953bd6545ae91eecde7a7e23,
-    type: 3}
-  blueUse_pt_br: {fileID: 3446062815276563608, guid: 37854ca7953bd6545ae91eecde7a7e23,
-    type: 3}
-  blueEat_pt_br: {fileID: -5554693653739699177, guid: 37854ca7953bd6545ae91eecde7a7e23,
-    type: 3}
-  blueClose_pt_br: {fileID: 7771545140085672452, guid: 37854ca7953bd6545ae91eecde7a7e23,
-    type: 3}
-  blueTake_pt_br: {fileID: 758185862936201806, guid: 37854ca7953bd6545ae91eecde7a7e23,
-    type: 3}
-  pause: {fileID: 1814119287}
-  stop: {fileID: 828735617}
-  pause_en_us: {fileID: 21300000, guid: 9bd0311001fb73c4da0c36ecc06d1a76, type: 3}
-  stop_en_us: {fileID: 21300000, guid: df2b635aef617064c8d5577417b2235a, type: 3}
-  diary_en_us: {fileID: 7380699952702000915, guid: 2a197bb7e7c293c41a9ea2c759ad7066,
-    type: 3}
-  pause_pt_br: {fileID: 21300000, guid: c99dc7fdb98a86743a658f62b461b281, type: 3}
-  stop_pt_br: {fileID: 21300000, guid: 44984172b2c83c848a162004c4acbba4, type: 3}
-  diary_pt_br: {fileID: -8035106638300226010, guid: ec3e19c0937bac841824ca8f43a03a3a,
-    type: 3}
 --- !u!114 &1638618925
 MonoBehaviour:
   m_ObjectHideFlags: 0

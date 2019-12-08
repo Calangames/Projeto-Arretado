@@ -9,9 +9,7 @@ public class Interface : MonoBehaviour
 {
     public static Interface instance = null;
 
-    public string defaultDescription = "[Not yet achieved]";
-
-    public Image redActionImage, blueActionImage, redPadHudImage, bluePadHudImage, mouseHudImage;
+    public Image redActionImage, blueActionImage, mouseHudImage;
 
     public GameObject achievements, vignette;
 
