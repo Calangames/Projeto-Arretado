@@ -1,8 +1,35 @@
 fileFormatVersion: 2
-guid: 90f71ef87a2f80b46a59b2aebe93204d
+guid: e750a311711d1654e93cbfa3814a1278
 ModelImporter:
   serializedVersion: 26
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 2266291165161569155
+    second: env_PortaEntrada|Abrindo_Porta
+  - first:
+      74: 3498532606947320005
+    second: env_PortaEntrada|Cube.002Action
+  - first:
+      74: -5495234387842181903
+    second: env_PortaEntrada|env_ParedeAction.001
+  - first:
+      74: 5926753039416486627
+    second: env_PortaEntrada|LightAction
+  - first:
+      74: -6096290703383949073
+    second: env_PortaEntrada|LightAction.001
+  - first:
+      74: 7396939126983682471
+    second: env_PortaEntrada|LightAction.002
+  - first:
+      74: 8984725208125042350
+    second: env_PortaEntrada|LightAction.003
+  - first:
+      74: 7151092740943423267
+    second: env_PortaEntrada|LightAction.004
+  - first:
+      74: 8227717735992233631
+    second: env_PortaEntrada|Parado_Porta
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -87,7 +114,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
