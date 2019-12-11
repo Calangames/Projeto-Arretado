@@ -1602,8 +1602,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.93895775, y: 1, z: 1.18993}
-  m_Center: {x: -0.030521102, y: 0, z: -0.594965}
+  m_Size: {x: 1, y: 1, z: 1.18993}
+  m_Center: {x: -0, y: 0, z: -0.594965}
 --- !u!23 &206580814
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2854,6 +2854,85 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &410177877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410177880}
+  - component: {fileID: 410177879}
+  - component: {fileID: 410177878}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &410177878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410177877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Ele
+
+'
+--- !u!222 &410177879
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410177877}
+  m_CullTransparentMesh: 0
+--- !u!224 &410177880
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410177877}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7133333, y: 0.7133333, z: 0.7133333}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 588, y: 251.7}
+  m_SizeDelta: {x: 356.4, y: 165.3}
+  m_Pivot: {x: 0.5000002, y: 0.49999976}
 --- !u!1 &411371728
 GameObject:
   m_ObjectHideFlags: 0
@@ -5995,7 +6074,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2.656, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 360, z: -5.525}
 --- !u!1 &835722016
 GameObject:
@@ -7153,7 +7232,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989626581
 GameObject:
@@ -7313,10 +7392,6 @@ PrefabInstance:
     - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: jucileneBemVindo.Array.size
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
-      propertyPath: sandovalOxente.Array.size
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: bedroomDoor
@@ -7512,17 +7587,17 @@ PrefabInstance:
       objectReference: {fileID: 989626581}
     - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: iracemaSemChave.Array.data[0]
-      value: 'IRACEMA: Tenente Michael Sullivan? Eu estava te esperando.'
+      value: Tenente Michael Sullivan? Eu estava te esperando.
       objectReference: {fileID: 0}
     - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: iracemaSemChave.Array.data[1]
-      value: "IRACEMA: Infelizmente, temos um problema. N\xE3o consegui achar a chave
-        do nosso quarto."
+      value: "Infelizmente, temos um problema. N\xE3o consegui achar a chave do nosso
+        quarto."
       objectReference: {fileID: 0}
     - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: iracemaSemChave.Array.data[2]
-      value: "IRACEMA: Voc\xEA poderia encontr\xE1-la para mim? Pergunta ao Sandoval,
-        no balc\xE3o, acho que ele pode te ajudar."
+      value: "Voc\xEA poderia encontr\xE1-la para mim? Pergunta ao Sandoval, no balc\xE3o,
+        acho que ele pode te ajudar."
       objectReference: {fileID: 0}
     - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: jucilene
@@ -7549,29 +7624,6 @@ PrefabInstance:
     - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: jucileneBemVindo.Array.data[4]
       value: "JUCILENE: Bom dia, rapazes! Como est\xE3o os senhores hoje?"
-      objectReference: {fileID: 0}
-    - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
-      propertyPath: sandovalOxente.Array.data[0]
-      value: "SANDOVAL: Boa noite, senhor! Em que posso ajud\xE1-lo?"
-      objectReference: {fileID: 0}
-    - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
-      propertyPath: sandovalOxente.Array.data[1]
-      value: "SANDOVAL: Ah, ent\xE3o voc\xEA \xE9 o novo boy que a Iracema falou.
-        O que? A chave sumiu? Oxente."
-      objectReference: {fileID: 0}
-    - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
-      propertyPath: sandovalOxente.Array.data[2]
-      value: "SANDOVAL: Ent\xE3o, com a chegada de voc\xEAs aqui na cidade, o local
-        come\xE7ou a ficar um pouco tumultuado. N\xE3o que eu esteja reclamando, haha!"
-      objectReference: {fileID: 0}
-    - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
-      propertyPath: sandovalOxente.Array.data[3]
-      value: "SANDOVAL: Acho que ocorreu alguma confus\xE3o e uma das meninas pegou
-        essa chave por engano."
-      objectReference: {fileID: 0}
-    - target: {fileID: 759066953, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
-      propertyPath: sandovalOxente.Array.data[4]
-      value: "SANDOVAL: Fale com as garotas. Elas est\xE3o por a\xED no sal\xE3o."
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalRotation.x
@@ -8382,7 +8434,7 @@ RectTransform:
   m_Children:
   - {fileID: 266910036}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11374,7 +11426,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.024943, y: -0.000010967}
   m_SizeDelta: {x: 612.3, y: 44.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597540692
@@ -11395,13 +11447,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The Book is n\xFAmero on the table The Book is on the table The Book is
-    on the table The Book is on the table The Book is on the table The Book is on
-    the table The Book is on the table The Book is on the table The Book is on the
-    table The Book is on the table The Book is on the table The Book is on the table
+  m_text: The Book is on the table The Book is on the table The Book is on the table
     The Book is on the table The Book is on the table The Book is on the table The
     Book is on the table The Book is on the table The Book is on the table The Book
-    is on the table The Book is on the table"
+    is on the table The Book is on the table The Book is on the table The Book is
+    on the table The Book is on the table The Book is on the table The Book is on
+    the table The Book is on the table The Book is on the table The Book is on the
+    table The Book is on the table
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11429,10 +11481,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 12
+  m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 12
   m_fontSizeMax: 18
   m_fontStyle: 0
@@ -11446,7 +11498,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 66
+  m_firstOverflowCharacterIndex: 344
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -11470,12 +11522,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: -0.000013496833, z: 0, w: -0.5410996}
   m_textInfo:
     textComponent: {fileID: 1597540692}
-    characterCount: 506
+    characterCount: 499
     spriteCount: 0
-    spaceCount: 121
-    wordCount: 122
+    spaceCount: 119
+    wordCount: 120
     linkCount: 0
-    lineCount: 8
+    lineCount: 5
     pageCount: 1
     materialCount: 2
   m_isUsingLegacyAnimationComponent: 0
@@ -12093,7 +12145,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 0
+  m_padding: 3.05
   m_canvasRenderer: {fileID: 1752113484}
   m_TextComponent: {fileID: 1771320956591412}
   m_materialReferenceIndex: 1
@@ -12149,8 +12201,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.42933267, y: 1, z: 1.18993}
-  m_Center: {x: -0.022156961, y: 0, z: -0.594965}
+  m_Size: {x: 1, y: 1, z: 1.18993}
+  m_Center: {x: -0, y: 0, z: -0.594965}
 --- !u!23 &1752696132
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13411,7 +13463,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2.66666, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: -1.6200001}
 --- !u!1001 &1968463356
 PrefabInstance:
