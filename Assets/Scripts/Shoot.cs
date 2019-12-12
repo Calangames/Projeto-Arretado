@@ -9,7 +9,7 @@ public class Shoot : MonoBehaviour
     [Range(0f, 10f)]
     public float maxDistance = 5f;
     public GameObject ending;
-    public GameObject jucilene, iracema;
+    public GameObject jucilene, iracema, sandoval;
     //public GameObject doggie, fishBowl, fishFood, shower, skeleton, serial, milk, bowl, cerealBowCanvas, bathroomFaucet, sinkFaucet, wife, mask, arms, chainsaw, sword, car, mirrorJacket, mirrorMask;
     //public Vector3 bowlSinkPosition;
     //public ParticleSystem showerWater, bathroomFaucetWater, sinkFaucetWater;
@@ -18,14 +18,14 @@ public class Shoot : MonoBehaviour
     public int lockedCounter = 0;
 
     [TextArea(1, 10)]
-    public string[] jucileneBemVindo, iracemaSemChave;
+    public string[] jucileneBemVindo, iracemaSemChave, sandovalOxente;
 
     private FirstPersonController firstPersonController;
     private LayerMask layerMask;
     private bool firing1, pressingEsc, pressingDiary, paused = false, fedFish, pettedDoggie, kissed, masked, ended, armed, cleaned, red;
     private enum NextStep
     {
-        Jucilene = 1, Iracema =2, Sandoval =4, EntraQuarto =8, FechaPorta = 16
+        Jucilene = 1, Iracema =2, Sandoval =4, ProcurandoChave = 8, EntraQuarto =16, FechaPorta = 32
     };
     private NextStep nextStep = NextStep.Jucilene;
     //private Door[] doors = new Door[9];
@@ -175,6 +175,25 @@ public class Shoot : MonoBehaviour
                                     else
                                     {
                                         MonologueManager.instance.StartMonologue(iracemaSemChave);
+                                        firstPersonController.Locked = true;
+                                    }
+                                }
+                                break;
+                            case NextStep.Sandoval:
+                                if (interactableId == sandoval.GetInstanceID())
+                                {
+                                    if (MonologueManager.instance.Running)
+                                    {
+                                        if (MonologueManager.instance.Sentences.Count == 0)
+                                        {
+                                            firstPersonController.Locked = false;
+                                            nextStep = NextStep.ProcurandoChave;
+                                        }
+                                        MonologueManager.instance.DisplayNextSentence();
+                                    }
+                                    else
+                                    {
+                                        MonologueManager.instance.StartMonologue(sandovalOxente);
                                         firstPersonController.Locked = true;
                                     }
                                 }
