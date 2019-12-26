@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class MonologueManager : MonoBehaviour
+public class InteractionManager : MonoBehaviour
 {
-	public TMPro.TextMeshProUGUI dialogueText;
-	public Animator animator;
+    public TMPro.TextMeshProUGUI dialogueText;
+    public Image actionImage, mouseHudImage;
+    public Animator animator;
+    public List<Boolean> booleans;
 
-    public static MonologueManager instance = null;
+    public static InteractionManager instance = null;
+    //Adding a static (if possible) dictonary of <int sceneIndex, InteractionManager instance> should work for multiple scenes
 
     [SerializeField]
     private List<Interactable> interactables = new List<Interactable>();
 
-	public Queue<string> Sentences{ get; set; }
+    public Queue<string> Sentences { get; set; }
 
     public bool Running { get; set; }
     public bool Typing { get; set; }
@@ -29,22 +32,14 @@ public class MonologueManager : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start () 
-	{
-		Sentences = new Queue<string> ();
+    void Start()
+    {
+        Sentences = new Queue<string>();
         InteractableId = -1;
     }
 
-    public void StartMonologue(string sentence)
-    {
-        Running = true;
-        animator.SetBool("IsOpen", true);
-        Sentences.Clear();
-        Sentences.Enqueue(sentence);
-        DisplayNextSentence();
-    }
-
-    public void StartMonologue(string[] sentences)
+    //Legacy
+    public void StartDialogue(string[] sentences)
     {
         Running = true;
         animator.SetBool("IsOpen", true);
@@ -61,7 +56,33 @@ public class MonologueManager : MonoBehaviour
         EndMonologue();
     }
 
-    public void StartMonologue (int id)
+    public void ChangeActionSprite(int id, string tag)
+    {
+        foreach (Interactable interactable in interactables)
+        {
+            if (interactable.iGameObject.GetInstanceID() == id || (interactable.iGameObject == null && interactable.tag.Equals(tag)))
+            {
+                for (int i = interactable.interactions.Count - 1; i >= 0; i--)
+                {
+                    if (FulfillConditions(interactable.interactions[i].conditions))
+                    {
+                        actionImage.sprite = interactable.interactions[i].actionSprite;
+                        actionImage.enabled = true;
+                        mouseHudImage.enabled = true;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public void HideMouseHUD()
+    {
+        actionImage.enabled = false;
+        mouseHudImage.enabled = false;
+    }
+
+    public void StartInteraction (int id, string tag)
 	{
         Running = true;
         InteractableId = id;
@@ -69,20 +90,42 @@ public class MonologueManager : MonoBehaviour
 		Sentences.Clear ();
         foreach (Interactable interactable in interactables)
         {
-            if (interactable.iGameObject.GetInstanceID() == id)
+            if (interactable.iGameObject.GetInstanceID() == id || (interactable.iGameObject == null && interactable.tag.Equals(tag)))
             {
-                foreach (string sentence in interactable.sentences)
+                for (int i = interactable.interactions.Count - 1; i >= 0; i--)
                 {
-                    Sentences.Enqueue(sentence);
-                }
-                DisplayNextSentence();
-                return;
+                    if (FulfillConditions(interactable.interactions[i].conditions))
+                    {
+                        foreach (string sentence in interactable.interactions[i].sentences)
+                        {
+                            Sentences.Enqueue(sentence);
+                        }
+                        DisplayNextSentence();
+                        return;
+                    }
+                }                
             }
         }
         EndMonologue();
     }
 
-	public void DisplayNextSentence()
+    private bool FulfillConditions(List<int> conditions)
+    {
+        for (int i = 0; i < conditions.Count; i++)
+        {
+            if (conditions[i] == -1 && booleans[i].value)
+            {
+                return false;
+            }
+            else if (conditions[i] == 1 && !booleans[i].value)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void DisplayNextSentence()
 	{
 		if (Sentences.Count == 0) 
 		{
@@ -95,11 +138,12 @@ public class MonologueManager : MonoBehaviour
 		StartCoroutine (TypeSentence (sentence));
 	}
 
-    public Sprite RedAction(int hitId)
+    //Legacy
+    public Sprite Action(int hitId, string tag)
     {
         foreach (Interactable interactable in interactables)
         {
-            if (interactable.iGameObject.GetInstanceID() == hitId)
+            if (interactable.iGameObject.GetInstanceID() == hitId || interactable.tag.Equals(tag))
             {
                 return interactable.redAction;
             }
@@ -168,10 +212,36 @@ public class MonologueManager : MonoBehaviour
 }
 
 [System.Serializable]
+public class Boolean
+{
+    public string name;
+    public bool value;
+
+    public Boolean(string name, bool value)
+    {
+        this.name = name;
+        this.value = value;
+    }
+}
+
+[System.Serializable]
 public class Interactable
 {
     public GameObject iGameObject;
+    public string tag;
+    public Texture texture;
     [TextArea(1, 10)]
     public string[] sentences;
-    public Sprite redAction;
+    public Sprite redAction; //Legacy
+    public List<Interaction> interactions = new List<Interaction>();
+
+    [System.Serializable]
+    public class Interaction
+    {
+        public string description;
+        public Sprite actionSprite;
+        [TextArea(1, 10)]
+        public string[] sentences;
+        public List<int> conditions = new List<int>();
+    }
 }

@@ -56,8 +56,8 @@ public class DummyPlayer : MonoBehaviour
     {
         if (!hitAlarm)
         {
-            canTurnHead = startedWaking && !MonologueManager.instance.Running;
-            if (!MonologueManager.instance.Typing)
+            canTurnHead = startedWaking && !InteractionManager.instance.Running;
+            if (!InteractionManager.instance.Typing)
             {
                 RaycastHit hit;
                 Vector3 direction = dummyCamera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, dummyCamera.nearClipPlane));
@@ -68,9 +68,9 @@ public class DummyPlayer : MonoBehaviour
                     if (hit.transform.CompareTag("Interactable"))
                     {
                         int hitId = hit.transform.gameObject.GetInstanceID();
-                        if (!MonologueManager.instance.Running)
+                        if (!InteractionManager.instance.Running)
                         {
-                            Interface.instance.redActionImage.sprite = MonologueManager.instance.RedAction(hitId);
+                            Interface.instance.redActionImage.sprite = InteractionManager.instance.Action(hitId, hit.transform.gameObject.tag);
                             Interface.instance.redActionImage.enabled = true;
                             if (alarmClock.GetInstanceID() == hitId)
                             {
@@ -90,7 +90,7 @@ public class DummyPlayer : MonoBehaviour
                         if (Input.GetAxisRaw("Fire1") == 1 && !firing1)
                         {
                             firing1 = true;
-                            if (!MonologueManager.instance.Running && alarmClock.GetInstanceID() == hitId)
+                            if (!InteractionManager.instance.Running && alarmClock.GetInstanceID() == hitId)
                             {
                                 startedWaking = false;
                                 hitAlarm = true;
@@ -106,18 +106,18 @@ public class DummyPlayer : MonoBehaviour
                         else if (Input.GetAxisRaw("Fire2") == 1 && !firing2)
                         {
                             firing2 = true;
-                            if (MonologueManager.instance.Running && MonologueManager.instance.InteractableId == hitId)
+                            if (InteractionManager.instance.Running && InteractionManager.instance.InteractableId == hitId)
                             {
-                                if (MonologueManager.instance.Sentences.Count == 0)
+                                if (InteractionManager.instance.Sentences.Count == 0)
                                 {
                                     canTurnHead = true;
                                 }
-                                MonologueManager.instance.DisplayNextSentence();
+                                InteractionManager.instance.DisplayNextSentence();
                             }
                             else
                             {
                                 canTurnHead = false;
-                                MonologueManager.instance.StartMonologue(hitId);
+                                InteractionManager.instance.StartInteraction(hitId, hit.transform.gameObject.tag);
                             }
                             return;
                         }

@@ -9,7 +9,7 @@ public class Shoot : MonoBehaviour
     [Range(0f, 10f)]
     public float maxDistance = 5f;
     public GameObject ending;
-    public GameObject jucilene, iracema, sandoval;
+    public GameObject iracema, sandoval;
     //public GameObject doggie, fishBowl, fishFood, shower, skeleton, serial, milk, bowl, cerealBowCanvas, bathroomFaucet, sinkFaucet, wife, mask, arms, chainsaw, sword, car, mirrorJacket, mirrorMask;
     //public Vector3 bowlSinkPosition;
     //public ParticleSystem showerWater, bathroomFaucetWater, sinkFaucetWater;
@@ -22,7 +22,7 @@ public class Shoot : MonoBehaviour
 
     private FirstPersonController firstPersonController;
     private LayerMask layerMask;
-    private bool firing1, pressingEsc, pressingDiary, paused = false, fedFish, pettedDoggie, kissed, masked, ended = false, armed, cleaned, red;
+    private bool firing1, pressingEsc, pressingDiary, paused = false, fedFish, pettedDoggie, kissed, masked, ended = false, armed, cleaned;
     private enum NextStep
     {
         Jucilene = 1, Iracema =2, Sandoval =4, ProcurandoChave = 8, EntraQuarto =16, FechaPorta = 32
@@ -34,10 +34,10 @@ public class Shoot : MonoBehaviour
     {
         layerMask = LayerMask.GetMask("Default");
         firstPersonController = GetComponent<FirstPersonController>();
-        MonologueManager.instance.FirstPersonController(firstPersonController);
+        InteractionManager.instance.FirstPersonController(firstPersonController);
         
         firstPersonController.Locked = true;
-        //StartCoroutine(WaitAndTalk());
+        StartCoroutine(WaitAndTalk());
         //doors[0] = new Door(bedroomDoor.GetChild(0).gameObject);
         //doors[1] = new Door(bathroomDoor.GetChild(0).gameObject, true);
         //doors[2] = new Door(closetDoor.GetChild(0).gameObject);
@@ -52,9 +52,9 @@ public class Shoot : MonoBehaviour
     private IEnumerator WaitAndTalk()
     {
         yield return new WaitForSeconds(0.5f);
-        if (!MonologueManager.instance.Running)
+        if (!InteractionManager.instance.Running)
         {
-            MonologueManager.instance.StartMonologue(jucileneBemVindo);
+            InteractionManager.instance.StartDialogue(jucileneBemVindo);
         }
     }
 
@@ -98,7 +98,7 @@ public class Shoot : MonoBehaviour
             Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = paused;
         }        
-        if (!paused && !MonologueManager.instance.Typing)
+        if (!paused && !InteractionManager.instance.Typing)
         {
             RaycastHit hit;
             Vector3 direction = Camera.main.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, Camera.main.nearClipPlane));
@@ -106,100 +106,44 @@ public class Shoot : MonoBehaviour
             Physics.Raycast(ray, out hit, maxDistance, layerMask, QueryTriggerInteraction.Ignore);
             if (hit.transform)
             {
-                if (hit.transform.CompareTag("Interactable"))
+                if (!hit.transform.CompareTag("Untagged"))
                 {
                     int hitId = hit.transform.gameObject.GetInstanceID();
-                    if (!MonologueManager.instance.Running)
+                    if (!InteractionManager.instance.Running)
                     {
                         if (/* hitId != car.GetInstanceID() || */ !ended)
                         {
                             //Interface.instance.redActionImage.sprite = MonologueManager.instance.RedAction(hitId);
                             //red = Interface.instance.redActionImage.sprite != null;
                             //Interface.instance.redActionImage.enabled = red;
-
-                            CheckBlueAndChangeSprite(hitId);
-                            Interface.instance.mouseHudImage.enabled = red;
+                            InteractionManager.instance.ChangeActionSprite(hit.transform.gameObject.GetInstanceID(), hit.transform.gameObject.tag);
                         }
                         else
                         {
-                            HideMouseHUD();
+                            InteractionManager.instance.HideMouseHUD();
                         }
                     }
                     else
                     {
-                        HideMouseHUD();
+                        InteractionManager.instance.HideMouseHUD();
                     }
                     if (Input.GetAxisRaw("Fire1") == 1 && !firing1 /*&& !MonologueManager.instance.Running*/)
                     {
                         firing1 = true;
-                        int interactableId = hit.transform.gameObject.GetInstanceID();
-                        switch (nextStep)
+                        if (InteractionManager.instance.Running)
                         {
-                            case NextStep.Jucilene:
-                                if (interactableId == jucilene.GetInstanceID())
-                                {
-                                    //AudioSource doggieAudioSource = doggie.GetComponent<AudioSource>();
-                                    //doggieAudioSource.Play();
-
-                                    if (MonologueManager.instance.Running)
-                                    {
-                                        if (MonologueManager.instance.Sentences.Count == 0)
-                                        {
-                                            firstPersonController.Locked = false;
-                                            nextStep = NextStep.Iracema;
-                                        }
-                                        MonologueManager.instance.DisplayNextSentence();
-                                    }
-                                    else
-                                    {
-                                        MonologueManager.instance.StartMonologue(jucileneBemVindo);
-                                        firstPersonController.Locked = true;
-                                    }
-                                }
-                                break;
-                            case NextStep.Iracema:
-                                if (interactableId == iracema.GetInstanceID())
-                                {
-                                    //AudioSource doggieAudioSource = doggie.GetComponent<AudioSource>();
-                                    //doggieAudioSource.Play();
-
-                                    if (MonologueManager.instance.Running)
-                                    {
-                                        if (MonologueManager.instance.Sentences.Count == 0)
-                                        {
-                                            firstPersonController.Locked = false;
-                                            nextStep = NextStep.Sandoval;
-                                        }
-                                        MonologueManager.instance.DisplayNextSentence();
-                                    }
-                                    else
-                                    {
-                                        MonologueManager.instance.StartMonologue(iracemaSemChave);
-                                        firstPersonController.Locked = true;
-                                    }
-                                }
-                                break;
-                            case NextStep.Sandoval:
-                                if (interactableId == sandoval.GetInstanceID())
-                                {
-                                    if (MonologueManager.instance.Running)
-                                    {
-                                        if (MonologueManager.instance.Sentences.Count == 0)
-                                        {
-                                            firstPersonController.Locked = false;
-                                            nextStep = NextStep.ProcurandoChave;
-                                        }
-                                        MonologueManager.instance.DisplayNextSentence();
-                                    }
-                                    else
-                                    {
-                                        MonologueManager.instance.StartMonologue(sandovalOxente);
-                                        firstPersonController.Locked = true;
-                                    }
-                                }
-                                break;
+                            if (InteractionManager.instance.Sentences.Count == 0)
+                            {
+                                firstPersonController.Locked = false;
+                            }
+                            InteractionManager.instance.DisplayNextSentence();
                         }
-                                
+                        else
+                        {
+                            int interactableId = hit.transform.gameObject.GetInstanceID();
+                            firstPersonController.Locked = true;
+                            InteractionManager.instance.StartInteraction(interactableId, hit.transform.gameObject.tag);
+                        }
                         /*
                         else if (interactableId == wife.GetInstanceID())
                         {
@@ -478,12 +422,12 @@ public class Shoot : MonoBehaviour
                 }
                 else
                 {
-                    HideMouseHUD();
+                    InteractionManager.instance.HideMouseHUD();
                 }
             }
             else
             {
-                HideMouseHUD();
+                InteractionManager.instance.HideMouseHUD();
             }            
             if (Input.GetAxisRaw("Fire1") == 0)
             {
@@ -492,125 +436,8 @@ public class Shoot : MonoBehaviour
         }
         else
         {
-            HideMouseHUD();
+            InteractionManager.instance.HideMouseHUD();
         }
-    }
-
-    private void CheckBlueAndChangeSprite(int hitId)
-    {
-        if (jucilene.GetInstanceID() == hitId && nextStep == NextStep.Jucilene)
-        {
-            Interface.instance.redActionImage.sprite = Interface.instance.blueFalar;
-            Interface.instance.redActionImage.enabled = true;
-            red = true;
-        }
-        else if (iracema.GetInstanceID() == hitId && nextStep == NextStep.Iracema)
-        {
-            Interface.instance.redActionImage.sprite = Interface.instance.blueFalar;
-            Interface.instance.redActionImage.enabled = true;
-            red = true;
-        }
-        else if (sandoval.GetInstanceID() == hitId && nextStep == NextStep.Sandoval)
-        {
-            Interface.instance.redActionImage.sprite = Interface.instance.blueFalar;
-            Interface.instance.redActionImage.enabled = true;
-            red = true;
-        }
-        /*
-        else if ((fishBowl.GetInstanceID() == hitId || fishFood.GetInstanceID() == hitId) && !fedFish)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueUse;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }else if (bathroomFaucet.GetInstanceID() == hitId)
-        {
-                    
-        }
-        else if (shower.GetInstanceID() == hitId && nextStep == NextStep.Shower)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueOpen;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (skeleton.GetInstanceID() == hitId && nextStep == NextStep.ChangeClothes)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueTake;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (serial.GetInstanceID() == hitId && nextStep == NextStep.Serial)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueUse;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (milk.GetInstanceID() == hitId && nextStep == NextStep.Milk)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueUse;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (bowl.GetInstanceID() == hitId && nextStep == NextStep.Eat)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueEat;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (bowl.GetInstanceID() == hitId && !cleaned && (nextStep == NextStep.MaskAndWeapons || nextStep == NextStep.DriveOff))
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueUse;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (sinkFaucet.GetInstanceID() == hitId && !cleaned && (nextStep == NextStep.MaskAndWeapons || nextStep == NextStep.DriveOff))
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueUse;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (wife.GetInstanceID() == hitId && !kissed)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueKiss;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (mask.GetInstanceID() == hitId && !masked)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueTake;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (arms.GetInstanceID() == hitId || chainsaw.GetInstanceID() == hitId || sword.GetInstanceID() == hitId)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueTake;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (car.GetInstanceID() == hitId && nextStep == NextStep.DriveOff && !ended)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueOpen;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else if (Diary.instance.diaryObject.GetInstanceID() == hitId)
-        {
-            Interface.instance.blueActionImage.sprite = Interface.instance.blueTake;
-            Interface.instance.blueActionImage.enabled = true;
-            blue = true;
-        }
-        else
-        {
-            Interface.instance.blueActionImage.enabled = false;
-            blue = false;
-        }
-        */
-    }
-
-    private void HideMouseHUD()
-    {
-        Interface.instance.redActionImage.enabled = false;
-        Interface.instance.mouseHudImage.enabled = false;
-        red = false;
     }
 
     private void UnlockCharacter()

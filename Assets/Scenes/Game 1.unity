@@ -2772,7 +2772,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 3.05
+  m_padding: 0
   m_canvasRenderer: {fileID: 323061188}
   m_TextComponent: {fileID: 1597540692}
   m_materialReferenceIndex: 1
@@ -5680,6 +5680,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.099999994, y: 0.0130921295, z: 0.09999997}
   m_Center: {x: -0.000033987686, y: -0.00005067838, z: 0.050467934}
+--- !u!21 &733500953
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: cola1 (Instance)
+  m_Shader: {fileID: 10751, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 85bea6f8d543bb34dbea442886b3d7ae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Cutoff: 0.5
+    m_Colors: []
 --- !u!1 &736696333
 GameObject:
   m_ObjectHideFlags: 0
@@ -7268,7 +7294,7 @@ GameObject:
   - component: {fileID: 869178446}
   - component: {fileID: 869178445}
   m_Layer: 5
-  m_Name: Red Action Image
+  m_Name: Action Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8970,9 +8996,8 @@ GameObject:
   - component: {fileID: 1057487765}
   - component: {fileID: 1057487768}
   - component: {fileID: 1057487767}
-  - component: {fileID: 1057487766}
   m_Layer: 0
-  m_Name: Sandoval Mesh (1)
+  m_Name: Sandoval Back Mesh
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8992,19 +9017,6 @@ Transform:
   m_Father: {fileID: 1203503688}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1057487766
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057487764}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.18993}
-  m_Center: {x: -0, y: 0, z: -0.594965}
 --- !u!23 &1057487767
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10961,17 +10973,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 1597540692}
+  actionImage: {fileID: 869178445}
+  mouseHudImage: {fileID: 2068339446}
   animator: {fileID: 95817713737376541}
+  booleans:
+  - name: Falou com Iracema
+    value: 0
+  - name: Procurando Chave
+    value: 0
   interactables:
-  - iGameObject: {fileID: 0}
+  - iGameObject: {fileID: 989626581}
+    tag: Untagged
+    texture: {fileID: 2800000, guid: 873afc1a48126fb4ea96728fc96e0c10, type: 3}
     sentences:
-    - Oh shit
-    - Here we <color=#FF0000>go</color> again
-    redAction: {fileID: 21300000, guid: 7057026472fa4df43a4f673dc4fdd808, type: 3}
-  - iGameObject: {fileID: 1009798578}
+    - 
+    redAction: {fileID: 0}
+    interactions:
+    - description: "N\xE3o consegui achar a chave do nosso quarto."
+      actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
+      sentences:
+      - 'IRACEMA: Soldado Michael Sullivan? Eu estava te esperando.'
+      - "IRACEMA: Mas temos um problema. N\xE3o consegui achar a chave do nosso quarto."
+      - "IRACEMA: Voc\xEA poderia encontr\xE1-la para mim? Pergunta ao Sandoval, no
+        balc\xE3o, acho que ele pode te ajudar.\r"
+      conditions: ffffffff00000000
+  - iGameObject: {fileID: 206580811}
+    tag: Untagged
+    texture: {fileID: 2800000, guid: 6f800e632e239934c917b4a4ac0f2735, type: 3}
     sentences:
-    - "Oh n\xE3o...."
-    redAction: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
+    - 
+    redAction: {fileID: 0}
+    interactions:
+    - description: "Ah, ent\xE3o voc\xEA \xE9 o novo boy que a Iracema falou."
+      actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
+      sentences:
+      - "SANDOVAL: Boa noite, senhor! Em que posso ajud\xE1-lo?"
+      - "SANDOVAL: Ah, ent\xE3o voc\xEA \xE9 o novo boy que a Iracema falou. O que?
+        A chave sumiu? Oxente."
+      - "SANDOVAL: Ent\xE3o, com a chegada de voc\xEAs aqui na cidade, o local come\xE7ou
+        a ficar um pouco tumultuado. N\xE3o que eu esteja reclamando, haha!"
+      - "SANDOVAL: Acho que ocorreu alguma confus\xE3o e uma das meninas pegou essa
+        chave por engano."
+      - "SANDOVAL: Fale com as garotas. Elas est\xE3o por a\xED no sal\xE3o."
+      conditions: 0100000001000000
 --- !u!4 &1277341652
 Transform:
   m_ObjectHideFlags: 0
@@ -13643,6 +13687,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5972072196938993775, guid: e8a32f3ad66a2a14aae4bb340a39c52d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 733500953}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a32f3ad66a2a14aae4bb340a39c52d, type: 3}
 --- !u!4 &1724107126 stripped
@@ -13942,7 +13991,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 3.05
+  m_padding: 0
   m_canvasRenderer: {fileID: 1752113484}
   m_TextComponent: {fileID: 1771320956591412}
   m_materialReferenceIndex: 1
