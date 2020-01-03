@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class InteractionManager : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI dialogueText;
+    public TMPro.TextMeshProUGUI dialogueText, nameplateText;
     public Image actionImage, mouseHudImage;
     public Animator animator;
     public List<Boolean> booleans;
@@ -17,6 +18,7 @@ public class InteractionManager : MonoBehaviour
     [SerializeField]
     private List<Interactable> interactables = new List<Interactable>();
 
+    public Queue<string> Nameplates { get; set; }
     public Queue<string> Sentences { get; set; }
 
     public bool Running { get; set; }
@@ -25,6 +27,7 @@ public class InteractionManager : MonoBehaviour
 
     private WaitForSeconds delay = new WaitForSeconds(0.01f);
     private FirstPersonController firstPersonController;
+    private UnityEvent storedFunctionsAfterDialogue = null;
 
     void Awake()
     {
@@ -34,26 +37,33 @@ public class InteractionManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Nameplates = new Queue<string>();
         Sentences = new Queue<string>();
         InteractableId = -1;
     }
 
-    //Legacy
-    public void StartDialogue(string[] sentences)
+    public void ChangeBoolToFalse(string boolName)
     {
-        Running = true;
-        animator.SetBool("IsOpen", true);
-        Sentences.Clear();
-        if (sentences.Length > 0)
+        foreach (Boolean boolean in booleans)
         {
-            foreach (string sentence in sentences)
+            if (boolean.name.Equals(boolName))
             {
-                Sentences.Enqueue(sentence);
+                boolean.value = false;
+                return;
             }
-            DisplayNextSentence();
-            return;
         }
-        EndMonologue();
+    }
+
+    public void ChangeBoolToTrue(string boolName)
+    {
+        foreach (Boolean boolean in booleans)
+        {
+            if (boolean.name.Equals(boolName))
+            {
+                boolean.value = true;
+                return;
+            }
+        }
     }
 
     public void ChangeActionSprite(int id, string tag)
@@ -87,7 +97,8 @@ public class InteractionManager : MonoBehaviour
         Running = true;
         InteractableId = id;
 		animator.SetBool("IsOpen", true);
-		Sentences.Clear ();
+        Nameplates.Clear();
+		Sentences.Clear();
         foreach (Interactable interactable in interactables)
         {
             if (interactable.iGameObject.GetInstanceID() == id || (interactable.iGameObject == null && interactable.tag.Equals(tag)))
@@ -96,6 +107,12 @@ public class InteractionManager : MonoBehaviour
                 {
                     if (FulfillConditions(interactable.interactions[i].conditions))
                     {
+                        interactable.interactions[i].functions.Invoke();
+                        storedFunctionsAfterDialogue = interactable.interactions[i].functionsAfterDialogue;
+                        foreach (string nameplate in interactable.interactions[i].nameplates)
+                        {
+                            Nameplates.Enqueue(nameplate);
+                        }
                         foreach (string sentence in interactable.interactions[i].sentences)
                         {
                             Sentences.Enqueue(sentence);
@@ -106,7 +123,7 @@ public class InteractionManager : MonoBehaviour
                 }                
             }
         }
-        EndMonologue();
+        EndDialogue();
     }
 
     private bool FulfillConditions(List<int> conditions)
@@ -129,12 +146,12 @@ public class InteractionManager : MonoBehaviour
 	{
 		if (Sentences.Count == 0) 
 		{
-			EndMonologue ();
+			EndDialogue();
 			return;
 		}
-
-		string sentence = Sentences.Dequeue ();
-		StopAllCoroutines ();
+        nameplateText.text = Nameplates.Dequeue();
+        string sentence = Sentences.Dequeue ();
+		//StopAllCoroutines ();
 		StartCoroutine (TypeSentence (sentence));
 	}
 
@@ -192,11 +209,16 @@ public class InteractionManager : MonoBehaviour
         Typing = false;
     }
 
-	public void EndMonologue()
-	{
+    public void EndDialogue()
+    {
 		animator.SetBool("IsOpen", false);
         firstPersonController.Locked = false;
         StartCoroutine(Wait());
+        if (storedFunctionsAfterDialogue != null)
+        {
+            storedFunctionsAfterDialogue.Invoke();
+            storedFunctionsAfterDialogue = null;
+        }        
     }
 
     IEnumerator Wait()
@@ -240,8 +262,11 @@ public class Interactable
     {
         public string description;
         public Sprite actionSprite;
+        [TextArea(1, 1)]
+        public string[] nameplates;
         [TextArea(1, 10)]
         public string[] sentences;
-        public List<int> conditions = new List<int>();
+        public UnityEvent functions, functionsAfterDialogue;
+        public List<int> conditions = new List<int>();        
     }
 }

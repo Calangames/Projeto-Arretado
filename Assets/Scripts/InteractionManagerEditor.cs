@@ -7,7 +7,7 @@ using UnityEditor;
 [CustomEditor(typeof(InteractionManager))]
 public class InteractionManagerEditor : Editor
 {
-    SerializedProperty dialogueText, actionImage, mouseHudImage, animator, interactables, booleans;
+    SerializedProperty dialogueText, nameplateText, actionImage, mouseHudImage, animator, interactables, booleans;
     static bool[] showI = new bool[0];
     static bool[][] showAction = new bool[0][];
 
@@ -16,6 +16,7 @@ public class InteractionManagerEditor : Editor
     void OnEnable()
     {
         dialogueText = serializedObject.FindProperty("dialogueText");
+        nameplateText = serializedObject.FindProperty("nameplateText");
         actionImage = serializedObject.FindProperty("actionImage");
         mouseHudImage = serializedObject.FindProperty("mouseHudImage");
         animator = serializedObject.FindProperty("animator");
@@ -24,11 +25,13 @@ public class InteractionManagerEditor : Editor
         if (interactables.arraySize == 0)
         {
             interactables.arraySize = 1;
-            interactables.GetArrayElementAtIndex(0).FindPropertyRelative("sentences").arraySize = 1;
+            interactables.GetArrayElementAtIndex(0).FindPropertyRelative("tag").arraySize = 1;
             interactables.GetArrayElementAtIndex(0).FindPropertyRelative("tag").stringValue = "Untagged";
             SerializedProperty interactions = interactables.GetArrayElementAtIndex(0).FindPropertyRelative("interactions");
             interactions.arraySize = 1;
             interactions.GetArrayElementAtIndex(0).FindPropertyRelative("description").stringValue = "No description";
+            interactions.GetArrayElementAtIndex(0).FindPropertyRelative("nameplates").arraySize = 1;
+            interactions.GetArrayElementAtIndex(0).FindPropertyRelative("nameplates").GetArrayElementAtIndex(0).stringValue = "";
             interactions.GetArrayElementAtIndex(0).FindPropertyRelative("sentences").arraySize = 1;
             interactions.GetArrayElementAtIndex(0).FindPropertyRelative("sentences").GetArrayElementAtIndex(0).stringValue = "";
             interactions.GetArrayElementAtIndex(0).FindPropertyRelative("conditions").arraySize = booleans.arraySize;
@@ -55,6 +58,7 @@ public class InteractionManagerEditor : Editor
     {
         serializedObject.Update();
         EditorGUILayout.PropertyField(dialogueText);
+        EditorGUILayout.PropertyField(nameplateText);
         EditorGUILayout.PropertyField(actionImage);
         EditorGUILayout.PropertyField(mouseHudImage);
         EditorGUILayout.PropertyField(animator);
@@ -163,7 +167,6 @@ public class InteractionManagerEditor : Editor
                                 tag.stringValue = EditorGUILayout.TagField(tag.stringValue);
                             }
                         }
-
                         EditorGUILayout.PropertyField(texture, new GUIContent("Icon"));
                         #endregion
                         
@@ -273,11 +276,27 @@ public class InteractionManagerEditor : Editor
                                 }
                                 #endregion
 
-                                #region Sentences
+                                #region Sentences and Functions
+                                EditorGUILayout.Separator();
+                                SerializedProperty nameplates = interactions.GetArrayElementAtIndex(actionIndex).FindPropertyRelative("nameplates");
                                 SerializedProperty sentences = interactions.GetArrayElementAtIndex(actionIndex).FindPropertyRelative("sentences");
+                                SerializedProperty functions = interactions.GetArrayElementAtIndex(actionIndex).FindPropertyRelative("functions");
+                                if (sentences.arraySize == 0)
+                                {
+                                    EditorGUILayout.PropertyField(functions);
+                                }
+                                else
+                                {
+                                    EditorGUILayout.PropertyField(functions, new GUIContent("Functions Before Dialogue"));
+                                }
                                 for (int sIndex = 0; sIndex < sentences.arraySize; sIndex++)
                                 {
-                                    EditorGUILayout.PropertyField(sentences.GetArrayElementAtIndex(sIndex), GUIContent.none);
+                                    SerializedProperty sentenceNameplate = nameplates.GetArrayElementAtIndex(sIndex);
+                                    using (new EditorGUILayout.HorizontalScope())
+                                    {
+                                        EditorGUILayout.PropertyField(sentenceNameplate, new GUIContent("Nameplate"), GUILayout.MaxWidth(120f));
+                                        EditorGUILayout.PropertyField(sentences.GetArrayElementAtIndex(sIndex), GUIContent.none);
+                                    }
                                 }
                                 EditorGUILayout.Separator();
                                 using (new EditorGUILayout.HorizontalScope())
@@ -286,16 +305,24 @@ public class InteractionManagerEditor : Editor
                                     {
                                         if (GUILayout.Button(new GUIContent("Remove sentence")))
                                         {
+                                            nameplates.arraySize--;
                                             sentences.arraySize--;
                                         }
                                     }
                                     if (GUILayout.Button(new GUIContent("Add sentence")))
                                     {
+                                        nameplates.arraySize++;
                                         sentences.arraySize++;
                                         sentences.GetArrayElementAtIndex(sentences.arraySize - 1).stringValue = "";
                                     }
                                 }
-                                #endregion                                
+                                if (sentences.arraySize != 0)
+                                {
+                                    EditorGUILayout.Separator();
+                                    SerializedProperty functionsAfterDialogue = interactions.GetArrayElementAtIndex(actionIndex).FindPropertyRelative("functionsAfterDialogue");
+                                    EditorGUILayout.PropertyField(functionsAfterDialogue);
+                                }
+                                #endregion
                             }
                         }
                         #endregion
@@ -319,6 +346,8 @@ public class InteractionManagerEditor : Editor
                                 {
                                     ResizeShowD(iIndex);
                                 }
+                                interactions.GetArrayElementAtIndex(interactions.arraySize - 1).FindPropertyRelative("nameplates").arraySize = 1;
+                                interactions.GetArrayElementAtIndex(interactions.arraySize - 1).FindPropertyRelative("nameplates").GetArrayElementAtIndex(0).stringValue = "";
                                 interactions.GetArrayElementAtIndex(interactions.arraySize - 1).FindPropertyRelative("sentences").arraySize = 1;
                                 interactions.GetArrayElementAtIndex(interactions.arraySize - 1).FindPropertyRelative("sentences").GetArrayElementAtIndex(0).stringValue = "";
                                 interactions.GetArrayElementAtIndex(interactions.arraySize - 1).FindPropertyRelative("description").stringValue = "No description";
@@ -362,6 +391,8 @@ public class InteractionManagerEditor : Editor
                 SerializedProperty interactions = newInteractable.FindPropertyRelative("interactions");
                 interactions.arraySize = 1;
                 interactions.GetArrayElementAtIndex(0).FindPropertyRelative("description").stringValue = "No description";
+                interactions.GetArrayElementAtIndex(0).FindPropertyRelative("nameplates").arraySize = 1;
+                interactions.GetArrayElementAtIndex(0).FindPropertyRelative("nameplates").GetArrayElementAtIndex(0).stringValue = "";
                 interactions.GetArrayElementAtIndex(0).FindPropertyRelative("sentences").arraySize = 1;
                 interactions.GetArrayElementAtIndex(0).FindPropertyRelative("sentences").GetArrayElementAtIndex(0).stringValue = "";
                 SerializedProperty newConditions = interactions.GetArrayElementAtIndex(0).FindPropertyRelative("conditions");

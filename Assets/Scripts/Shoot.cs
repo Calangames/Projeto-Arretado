@@ -9,16 +9,13 @@ public class Shoot : MonoBehaviour
     [Range(0f, 10f)]
     public float maxDistance = 5f;
     public GameObject ending;
-    public GameObject iracema, sandoval;
+    public GameObject jucilene;
     //public GameObject doggie, fishBowl, fishFood, shower, skeleton, serial, milk, bowl, cerealBowCanvas, bathroomFaucet, sinkFaucet, wife, mask, arms, chainsaw, sword, car, mirrorJacket, mirrorMask;
     //public Vector3 bowlSinkPosition;
     //public ParticleSystem showerWater, bathroomFaucetWater, sinkFaucetWater;
     //public Material bowlEmpty, bowlSerialAndMilk, bowlSerial;
     //public Transform bedroomDoor, bathroomDoor, closetDoor, kitchenDoor, tvDoor, garageDoor, outsideDoor, fridgeDoor1, fridgeDoor2;
     public int lockedCounter = 0;
-
-    [TextArea(1, 10)]
-    public string[] jucileneBemVindo, iracemaSemChave, sandovalOxente;
 
     private FirstPersonController firstPersonController;
     private LayerMask layerMask;
@@ -54,7 +51,7 @@ public class Shoot : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if (!InteractionManager.instance.Running)
         {
-            InteractionManager.instance.StartDialogue(jucileneBemVindo);
+            InteractionManager.instance.StartInteraction(jucilene.GetInstanceID(), jucilene.tag);
         }
     }
 
