@@ -23,11 +23,13 @@ public class InteractionManager : MonoBehaviour
 
     public bool Running { get; set; }
     public bool Typing { get; set; }
-    public int InteractableId { get; set; }
+    public Interactable StoredInteractable { get; set; }
 
     private WaitForSeconds delay = new WaitForSeconds(0.01f);
     private FirstPersonController firstPersonController;
     private UnityEvent storedFunctionsAfterDialogue = null;
+    private bool checkConditions;
+
 
     void Awake()
     {
@@ -39,7 +41,7 @@ public class InteractionManager : MonoBehaviour
     {
         Nameplates = new Queue<string>();
         Sentences = new Queue<string>();
-        InteractableId = -1;
+        StoredInteractable = null;
     }
 
     public void ChangeBoolToFalse(string boolName)
@@ -68,22 +70,48 @@ public class InteractionManager : MonoBehaviour
 
     public void ChangeActionSprite(int id, string tag)
     {
-        foreach (Interactable interactable in interactables)
+        if (StoredInteractable == null || StoredInteractable.iGameObject.GetInstanceID() != id)
         {
-            if (interactable.iGameObject.GetInstanceID() == id || (interactable.iGameObject == null && interactable.tag.Equals(tag)))
+            foreach (Interactable interactable in interactables)
             {
-                for (int i = interactable.interactions.Count - 1; i >= 0; i--)
+                if (interactable.iGameObject.GetInstanceID() == id || (interactable.iGameObject == null && interactable.tag.Equals(tag)))
                 {
-                    if (FulfillConditions(interactable.interactions[i].conditions))
+                    StoredInteractable = interactable;
+                    for (int i = interactable.interactions.Count - 1; i >= 0; i--)
                     {
-                        actionImage.sprite = interactable.interactions[i].actionSprite;
-                        actionImage.enabled = true;
-                        mouseHudImage.enabled = true;
-                        return;
+                        if (FulfillConditions(interactable.interactions[i].conditions))
+                        {
+                            actionImage.sprite = interactable.interactions[i].actionSprite;
+                            actionImage.enabled = true;
+                            mouseHudImage.enabled = true;
+                            checkConditions = false;
+                            return;
+                        }
                     }
+                    HideMouseHUD();
+                    checkConditions = false;
                 }
             }
         }
+        else if (StoredInteractable != null)
+        {
+            if (checkConditions)
+            {
+                for (int i = StoredInteractable.interactions.Count - 1; i >= 0; i--)
+                {
+                    if (FulfillConditions(StoredInteractable.interactions[i].conditions))
+                    {
+                        actionImage.sprite = StoredInteractable.interactions[i].actionSprite;
+                        actionImage.enabled = true;
+                        mouseHudImage.enabled = true;
+                        checkConditions = false;
+                        return;
+                    }
+                }
+                HideMouseHUD();
+                checkConditions = false;
+            }
+        }       
     }
 
     public void HideMouseHUD()
@@ -92,10 +120,39 @@ public class InteractionManager : MonoBehaviour
         mouseHudImage.enabled = false;
     }
 
+    public void StartInteraction()
+    {
+        Running = true;
+        animator.SetBool("IsOpen", true);
+        Nameplates.Clear();
+        Sentences.Clear();
+        if (StoredInteractable != null)
+        {
+            for (int i = StoredInteractable.interactions.Count - 1; i >= 0; i--)
+            {
+                if (FulfillConditions(StoredInteractable.interactions[i].conditions))
+                {
+                    StoredInteractable.interactions[i].functions.Invoke();
+                    storedFunctionsAfterDialogue = StoredInteractable.interactions[i].functionsAfterDialogue;
+                    foreach (string nameplate in StoredInteractable.interactions[i].nameplates)
+                    {
+                        Nameplates.Enqueue(nameplate);
+                    }
+                    foreach (string sentence in StoredInteractable.interactions[i].sentences)
+                    {
+                        Sentences.Enqueue(sentence);
+                    }
+                    DisplayNextSentence();
+                    return;
+                }
+            }
+        }
+        EndDialogue();
+    }
+
     public void StartInteraction (int id, string tag)
 	{
         Running = true;
-        InteractableId = id;
 		animator.SetBool("IsOpen", true);
         Nameplates.Clear();
 		Sentences.Clear();
@@ -213,6 +270,7 @@ public class InteractionManager : MonoBehaviour
     {
 		animator.SetBool("IsOpen", false);
         firstPersonController.Locked = false;
+        checkConditions = true;
         StartCoroutine(Wait());
         if (storedFunctionsAfterDialogue != null)
         {

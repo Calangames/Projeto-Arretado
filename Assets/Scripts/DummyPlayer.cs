@@ -106,7 +106,7 @@ public class DummyPlayer : MonoBehaviour
                         else if (Input.GetAxisRaw("Fire2") == 1 && !firing2)
                         {
                             firing2 = true;
-                            if (InteractionManager.instance.Running && InteractionManager.instance.InteractableId == hitId)
+                            if (InteractionManager.instance.Running  /* && InteractionManager.instance.InteractableId == hitId */)
                             {
                                 if (InteractionManager.instance.Sentences.Count == 0)
                                 {
