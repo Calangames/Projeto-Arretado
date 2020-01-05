@@ -6987,7 +6987,7 @@ GameObject:
   - component: {fileID: 832751152}
   m_Layer: 0
   m_Name: I Want You Poster
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7059,13 +7059,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832751151}
-  m_LocalRotation: {x: 0.00000007038183, y: 0.0000014586165, z: 0.04819639, w: -0.9988379}
-  m_LocalPosition: {x: -31.2, y: -1.8, z: 39.4}
+  m_LocalRotation: {x: 0.034079727, y: 0.70628506, z: -0.034079727, w: 0.70628506}
+  m_LocalPosition: {x: -30.2, y: -1.9, z: 32.4}
   m_LocalScale: {x: 2, y: 2.656, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
-  m_LocalEulerAnglesHint: {x: 0, y: 360, z: -5.525}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 5.525, y: 90, z: 0}
 --- !u!1 &835722016
 GameObject:
   m_ObjectHideFlags: 0
@@ -8339,7 +8339,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989626581
 GameObject:
@@ -9361,7 +9361,7 @@ Transform:
   - {fileID: 54129379}
   - {fileID: 1580067928}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1062374350
 GameObject:
@@ -9796,7 +9796,7 @@ RectTransform:
   m_Children:
   - {fileID: 266910036}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11327,8 +11327,8 @@ MonoBehaviour:
       - JUCILENE
       sentences:
       - "Bom dia, rapazes! Como est\xE3o os senhores hoje?"
-      - "Ol\xE1, Jucilene, estamos muito bem, obrigado. Este aqui \xE9 o soldado Michael,
-        ele acabou de chegar na cidade."
+      - "Ola, Juicylain, estamos muito ben, obrigadow. Este aqui \xE9 o soldado Michael,
+        ele acabou de chegar na cidade.\r"
       - "Ah, ent\xE3o \xE9 voc\xEA o novo boy? Muito prazer em conhec\xEA-lo."
       - "A Iracema t\xE1 te esperando l\xE1 dentro. Quarto n\xFAmero 3, basta pegar
         a escada \xE0 esquerda pra chegar l\xE1."
@@ -11406,6 +11406,46 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
       conditions: 01000000
+  - iGameObject: {fileID: 1967279902}
+    tag: Untagged
+    texture: {fileID: 2800000, guid: 9dab73769a975c443b6744f5c6bba3e8, type: 3}
+    sentences:
+    - 
+    redAction: {fileID: 0}
+    interactions:
+    - description: No description
+      actionSprite: {fileID: 21300000, guid: 7057026472fa4df43a4f673dc4fdd808, type: 3}
+      nameplates:
+      - Micheal
+      sentences:
+      - "<Olhe em volta, procure por espi\xF5es, use seu mouse>"
+      functions:
+        m_PersistentCalls:
+          m_Calls: []
+      functionsAfterDialogue:
+        m_PersistentCalls:
+          m_Calls: []
+      conditions: 00000000
+  - iGameObject: {fileID: 832751151}
+    tag: Untagged
+    texture: {fileID: 2800000, guid: 5ea8e8bca04241b43bbb0f03819b8c60, type: 3}
+    sentences:
+    - 
+    redAction: {fileID: 0}
+    interactions:
+    - description: No description
+      actionSprite: {fileID: 21300000, guid: 7057026472fa4df43a4f673dc4fdd808, type: 3}
+      nameplates:
+      - Micheal
+      sentences:
+      - "<Eu quero VOC\xCA usando \"W\" \"A\" \"S\" \"D\">"
+      functions:
+        m_PersistentCalls:
+          m_Calls: []
+      functionsAfterDialogue:
+        m_PersistentCalls:
+          m_Calls: []
+      conditions: 00000000
 --- !u!4 &1277341652
 Transform:
   m_ObjectHideFlags: 0
@@ -16156,7 +16196,7 @@ GameObject:
   - component: {fileID: 1967279903}
   m_Layer: 0
   m_Name: Spies Poster
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16233,7 +16273,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2.66666, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: -1.6200001}
 --- !u!1001 &1968250439
 PrefabInstance:
@@ -17732,7 +17772,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 86b2dc4d2d9df384798dfab29bc9583a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 86b2dc4d2d9df384798dfab29bc9583a,
         type: 3}
