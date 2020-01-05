@@ -65,14 +65,19 @@ public class InteractionManagerEditor : Editor
         EditorGUILayout.Separator();
         EditorGUILayout.LabelField("Booleans", EditorStyles.boldLabel);
         int i = 0;
+        int hBooleansMaxN = Mathf.FloorToInt((EditorGUIUtility.currentViewWidth) / 90f);
+        int hBooleansN = Mathf.Min(hBooleansMaxN, booleans.arraySize);
+        float maxWidth = 70f;
+
         for (int bIndex = 0; bIndex < booleans.arraySize; bIndex++)
         {
             if (i == 0)
             {
                 EditorGUILayout.BeginHorizontal();
-            }
+                GUILayout.Space(10f);
+            }            
             SerializedProperty boolName = booleans.GetArrayElementAtIndex(bIndex).FindPropertyRelative("name");
-            boolName.stringValue = EditorGUILayout.DelayedTextField(boolName.stringValue, GUILayout.MaxWidth(70f));
+            boolName.stringValue = EditorGUILayout.DelayedTextField(boolName.stringValue, GUILayout.MaxWidth(maxWidth));
             GUILayout.Space(10f);
             if (boolName.stringValue.Equals(""))
             {
@@ -88,18 +93,21 @@ public class InteractionManagerEditor : Editor
             }
             if (bIndex == booleans.arraySize - 1)
             {
-                if (i == 2)
+                if (i == hBooleansN - 1 && hBooleansN == hBooleansMaxN)
                 {
                     EditorGUILayout.EndHorizontal();
-                    PlusBooleanButton();
+                    EditorGUILayout.BeginHorizontal();
+                    GUILayout.Space(10f);
+                    PlusBooleanButton(maxWidth);
+                    EditorGUILayout.EndHorizontal();
                 }
                 else
                 {
-                    PlusBooleanButton();
+                    PlusBooleanButton(maxWidth);
                     EditorGUILayout.EndHorizontal();
                 }
             }
-            else if (i == 2)
+            else if (i == hBooleansN - 1)
             {
                 EditorGUILayout.EndHorizontal();
                 i = 0;
@@ -111,7 +119,7 @@ public class InteractionManagerEditor : Editor
         }
         if (booleans.arraySize == 0)
         {
-            PlusBooleanButton();
+            PlusBooleanButton(maxWidth);
         }
         EditorGUILayout.Separator();
         for (int iIndex = 0; iIndex < interactables.arraySize; iIndex++)
@@ -234,7 +242,7 @@ public class InteractionManagerEditor : Editor
                                             using (new EditorGUILayout.VerticalScope(GUI.skin.box))
                                             {
                                                 style.fontSize = 17;                                                
-                                                string columnLabel = column == -1 ? "False" : column == 0 ? "Neutral" : "True";
+                                                string columnLabel = column == -1 ? "False" : column == 0 ? "Ignore" : "True";
                                                 EditorGUILayout.LabelField(columnLabel, style, GUILayout.MaxWidth((EditorGUIUtility.currentViewWidth - 180f) / 3f));
                                                 style.fontSize = 12;
                                                 for (int index = 0; index < conditions.arraySize; index++)
@@ -408,9 +416,9 @@ public class InteractionManagerEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 
-    private void PlusBooleanButton()
+    private void PlusBooleanButton(float maxWidth)
     {
-        if (GUILayout.Button(new GUIContent("+"), GUILayout.MaxWidth(70f)))
+        if (GUILayout.Button(new GUIContent("+"), GUILayout.MaxWidth(maxWidth)))
         {
             booleans.arraySize++;
             booleans.GetArrayElementAtIndex(booleans.arraySize - 1).FindPropertyRelative("name").stringValue = "condition";
