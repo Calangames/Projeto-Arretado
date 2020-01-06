@@ -11309,6 +11309,16 @@ MonoBehaviour:
   booleans:
   - name: Procurando Chave
     value: 0
+  - name: crush 1
+    value: 0
+  - name: crush 2
+    value: 0
+  - name: crush choice
+    value: 0
+  - name: crush choice 1
+    value: 0
+  - name: crush choice 2
+    value: 0
   interactables:
   - iGameObject: {fileID: 1585809014}
     tag: Untagged
@@ -11337,7 +11347,7 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000
+      conditions: 000000000000000000000000000000000000000000000000
   - iGameObject: {fileID: 989626581}
     tag: Untagged
     texture: {fileID: 2800000, guid: 873afc1a48126fb4ea96728fc96e0c10, type: 3}
@@ -11373,7 +11383,7 @@ MonoBehaviour:
               m_StringArgument: Procurando Chave
               m_BoolArgument: 0
             m_CallState: 2
-      conditions: ffffffff
+      conditions: ffffffff0000000000000000000000000000000000000000
     - description: era oq mesmo?
       actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
       nameplates:
@@ -11386,7 +11396,7 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 01000000
+      conditions: 010000000000000000000000000000000000000000000000
   - iGameObject: {fileID: 206580811}
     tag: Untagged
     texture: {fileID: 2800000, guid: 6f800e632e239934c917b4a4ac0f2735, type: 3}
@@ -11417,7 +11427,38 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 01000000
+      conditions: 010000000000000000000000000000000000000000000000
+    - description: 'crush chicletes '
+      actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
+      nameplates:
+      - MICHEAL
+      - SANDOVAL
+      - SANDOVAL
+      - SANDOVAL
+      sentences:
+      - "Aquele garota, B\xE9bel, queria ajudar um amigow mas ela est\xE1 raivosa."
+      - "Seu Micheal. Bebel se esquenta muito f\xE1cil."
+      - 'Mas se tu tem um chiclete... Chiclets... '
+      - "D\xE1 um pra ela que vai aquietar essa criatura. Toma um aqui, de pra o seu
+        firend."
+      functions:
+        m_PersistentCalls:
+          m_Calls: []
+      functionsAfterDialogue:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1277341651}
+            m_MethodName: ChangeBoolToTrue
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: crush choice
+              m_BoolArgument: 0
+            m_CallState: 2
+      conditions: 000000000100000001000000000000000000000000000000
   - iGameObject: {fileID: 1967279902}
     tag: Untagged
     texture: {fileID: 2800000, guid: 9dab73769a975c443b6744f5c6bba3e8, type: 3}
@@ -11437,7 +11478,7 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000
+      conditions: 000000000000000000000000000000000000000000000000
   - iGameObject: {fileID: 832751151}
     tag: Untagged
     texture: {fileID: 2800000, guid: 5ea8e8bca04241b43bbb0f03819b8c60, type: 3}
@@ -11457,7 +11498,169 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000
+      conditions: 000000000000000000000000000000000000000000000000
+  - iGameObject: {fileID: 931102052}
+    tag: Untagged
+    texture: {fileID: 2800000, guid: 4b4a2e8fd69901b4db7f6c7de00aba8a, type: 3}
+    sentences:
+    - 
+    redAction: {fileID: 0}
+    interactions:
+    - description: iniciar quest
+      actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
+      nameplates:
+      - BEBEL
+      - BEBEL
+      - BEBEL
+      sentences:
+      - "Voc\xEA conhece aquele boy ali? o galado perto do wurlitzer... "
+      - "ELE N\xC3O PARA DE ME ENCARAR!"
+      - Que diabos que ele quer? fala, homi!
+      functions:
+        m_PersistentCalls:
+          m_Calls: []
+      functionsAfterDialogue:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1277341651}
+            m_MethodName: ChangeBoolToTrue
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: crush 1
+              m_BoolArgument: 0
+            m_CallState: 2
+      conditions: 00000000ffffffff00000000000000000000000000000000
+    - description: chiclets pro carl
+      actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
+      nameplates:
+      - BEBEL
+      - BEBEL
+      - BEBEL
+      sentences:
+      - "Ah, aquele boy, Carl, \xE9 at\xE9 fofinho, ele me deu uns chiclete!"
+      - "Enfim, ouvi que era voc\xEA que tava atr\xE1s duma chave."
+      - Depois que eu usei aquele quarto eu dei a chave pra Jucilene, ela organiza
+        tudo aqui.
+      functions:
+        m_PersistentCalls:
+          m_Calls: []
+      functionsAfterDialogue:
+        m_PersistentCalls:
+          m_Calls: []
+      conditions: 000000000000000000000000000000000100000000000000
+    - description: chiclets pra bebel
+      actionSprite: {fileID: 21300000, guid: 5e88e56f10eedb74597f3216ab451433, type: 3}
+      nameplates:
+      - BEBEL
+      - BEBEL
+      - BEBEL
+      sentences:
+      - Ai eu adoro chiclete brigado, fico te devendo ;)
+      - "Enfim, ouvi que era voc\xEA que tava atr\xE1s duma chave."
+      - Depois que eu usei aquele quarto eu dei a chave pra Jucilene, ela organiza
+        tudo aqui.
+      functions:
+        m_PersistentCalls:
+          m_Calls: []
+      functionsAfterDialogue:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1277341651}
+            m_MethodName: ChangeBoolToTrue
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: crush choice 2
+              m_BoolArgument: 0
+            m_CallState: 2
+      conditions: 000000000000000000000000010000000000000000000000
+  - iGameObject: {fileID: 754421946}
+    tag: Untagged
+    texture: {fileID: 2800000, guid: 7cdbf618743a1a74da8d43429cdb37b7, type: 3}
+    sentences:
+    - 
+    redAction: {fileID: 0}
+    interactions:
+    - description: Depois de falar com bebel
+      actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
+      nameplates:
+      - CARL
+      - CARL
+      - CARL
+      - CARL
+      sentences:
+      - "<H\xE3? O-ol\xE1... O que? Ela falou de mim? Eu estou incomodando?>"
+      - "<Oh n\xE3o\u2026>"
+      - "<Eu n\xE3o queria assust\xE1-la. A verdade \xE9 que ela \xE9 muito bonita,
+        e eu n\xE3o sei como me aproximar dela.>"
+      - "<Voc\xEA poderia me ajudar? Descobrir qualquer coisa que ela goste, algo
+        para quebrar o gelo.>"
+      functions:
+        m_PersistentCalls:
+          m_Calls: []
+      functionsAfterDialogue:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1277341651}
+            m_MethodName: ChangeBoolToTrue
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: crush 2
+              m_BoolArgument: 0
+            m_CallState: 2
+      conditions: 000000000100000000000000000000000000000000000000
+    - description: chiclets pro carl
+      actionSprite: {fileID: 21300000, guid: 5e88e56f10eedb74597f3216ab451433, type: 3}
+      nameplates:
+      - CARL
+      - CARL
+      sentences:
+      - <Oh Chiclets, isso vai me ajudar com ela?>
+      - "<Ok, Deus te aben\xE7oe amigo>"
+      functions:
+        m_PersistentCalls:
+          m_Calls: []
+      functionsAfterDialogue:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1277341651}
+            m_MethodName: ChangeBoolToTrue
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: crush choice 1
+              m_BoolArgument: 0
+            m_CallState: 2
+      conditions: 000000000000000000000000010000000000000000000000
+    - description: chiclets pra bebel
+      actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
+      nameplates:
+      - "CARL\t"
+      - CARL
+      sentences:
+      - "<Cara eu queria dar eles pra ela... agora eu n\xE3o sei o q falar...>"
+      - <Muito obrigado, Micheal>
+      functions:
+        m_PersistentCalls:
+          m_Calls: []
+      functionsAfterDialogue:
+        m_PersistentCalls:
+          m_Calls: []
+      conditions: 000000000000000000000000000000000000000001000000
 --- !u!4 &1277341652
 Transform:
   m_ObjectHideFlags: 0
