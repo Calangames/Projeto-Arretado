@@ -11309,15 +11309,15 @@ MonoBehaviour:
   booleans:
   - name: Procurando Chave
     value: 0
-  - name: crush 1
+  - name: Falou com Bebel
     value: 0
-  - name: crush 2
+  - name: Falou com Carl
     value: 0
   - name: crush choice
     value: 0
-  - name: crush choice 1
+  - name: Chiclete p/ Carl
     value: 0
-  - name: crush choice 2
+  - name: Chiclete p/ Bebel
     value: 0
   - name: pasta top
     value: 0
@@ -11460,18 +11460,7 @@ MonoBehaviour:
               m_StringArgument: crush choice
               m_BoolArgument: 0
             m_CallState: 2
-          - m_Target: {fileID: 1277341651}
-            m_MethodName: ChangeBoolToFalse
-            m_Mode: 5
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: crush 2
-              m_BoolArgument: 0
-            m_CallState: 2
-      conditions: 00000000000000000100000000000000000000000000000000000000
+      conditions: 000000000100000001000000ffffffff000000000000000000000000
   - iGameObject: {fileID: 1967279902}
     tag: Untagged
     texture: {fileID: 2800000, guid: 9dab73769a975c443b6744f5c6bba3e8, type: 3}
@@ -11543,7 +11532,7 @@ MonoBehaviour:
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
-              m_StringArgument: crush 1
+              m_StringArgument: Falou com Bebel
               m_BoolArgument: 0
             m_CallState: 2
       conditions: 00000000ffffffffffffffffffffffffffffffffffffffff00000000
@@ -11564,7 +11553,7 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000000000000000000000000000010000000000000000000000
+      conditions: 0000000001000000010000000100000001000000ffffffff00000000
     - description: chiclets pra bebel
       actionSprite: {fileID: 21300000, guid: 5e88e56f10eedb74597f3216ab451433, type: 3}
       nameplates:
@@ -11590,21 +11579,10 @@ MonoBehaviour:
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
-              m_StringArgument: crush choice 2
+              m_StringArgument: Chiclete p/ Bebel
               m_BoolArgument: 0
             m_CallState: 2
-          - m_Target: {fileID: 1277341651}
-            m_MethodName: ChangeBoolToFalse
-            m_Mode: 5
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: crush choice
-              m_BoolArgument: 0
-            m_CallState: 2
-      conditions: 00000000000000000000000001000000000000000000000000000000
+      conditions: 00000000010000000100000001000000ffffffffffffffff00000000
   - iGameObject: {fileID: 754421946}
     tag: Untagged
     texture: {fileID: 2800000, guid: 7cdbf618743a1a74da8d43429cdb37b7, type: 3}
@@ -11640,21 +11618,10 @@ MonoBehaviour:
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
-              m_StringArgument: crush 2
+              m_StringArgument: Falou com Carl
               m_BoolArgument: 0
             m_CallState: 2
-          - m_Target: {fileID: 1277341651}
-            m_MethodName: ChangeBoolToFalse
-            m_Mode: 5
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: crush 1
-              m_BoolArgument: 0
-            m_CallState: 2
-      conditions: 00000000010000000000000000000000000000000000000000000000
+      conditions: 0000000001000000ffffffffffffffffffffffffffffffff00000000
     - description: chiclets pro carl
       actionSprite: {fileID: 21300000, guid: 5e88e56f10eedb74597f3216ab451433, type: 3}
       nameplates:
@@ -11677,21 +11644,10 @@ MonoBehaviour:
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
-              m_StringArgument: crush choice 1
+              m_StringArgument: Chiclete p/ Carl
               m_BoolArgument: 0
             m_CallState: 2
-          - m_Target: {fileID: 1277341651}
-            m_MethodName: ChangeBoolToFalse
-            m_Mode: 5
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: crush choice
-              m_BoolArgument: 0
-            m_CallState: 2
-      conditions: 00000000000000000000000001000000000000000000000000000000
+      conditions: 00000000010000000100000001000000ffffffffffffffff00000000
     - description: chiclets pra bebel
       actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
       nameplates:
@@ -11706,7 +11662,7 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000000000000000000000000000000000000100000000000000
+      conditions: 00000000010000000100000001000000ffffffff0100000000000000
   - iGameObject: {fileID: 1752696129}
     tag: Untagged
     texture: {fileID: 2800000, guid: e18e44008d48e0f42b2d452c5a6996df, type: 3}
