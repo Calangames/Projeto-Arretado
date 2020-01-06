@@ -11329,7 +11329,7 @@ MonoBehaviour:
     - 
     redAction: {fileID: 0}
     interactions:
-    - description: "N\xE3o consegui achar a chave do nosso quarto."
+    - description: intro fala
       actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
       nameplates:
       - JUCILENE
@@ -11357,7 +11357,7 @@ MonoBehaviour:
     - 
     redAction: {fileID: 0}
     interactions:
-    - description: "N\xE3o consegui achar a chave do nosso quarto."
+    - description: sem chave
       actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
       nameplates:
       - IRACEMA
@@ -11406,7 +11406,7 @@ MonoBehaviour:
     - 
     redAction: {fileID: 0}
     interactions:
-    - description: "Ah, ent\xE3o voc\xEA \xE9 o novo boy que a Iracema falou."
+    - description: chave procura
       actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
       nameplates:
       - SANDOVAL
