@@ -7,7 +7,7 @@ using UnityEditor;
 [CustomEditor(typeof(InteractionManager))]
 public class InteractionManagerEditor : Editor
 {
-    SerializedProperty dialogueText, nameplateText, actionImage, mouseHudImage, animator, interactables, booleans;
+    SerializedProperty dialogueText, nameplateText, actionImage, mouseHudImage, animator, interactables, booleans, storylines;
     static bool[] showI = new bool[0];
     static bool[][] showAction = new bool[0][];
 
@@ -22,6 +22,7 @@ public class InteractionManagerEditor : Editor
         animator = serializedObject.FindProperty("animator");
         interactables = serializedObject.FindProperty("interactables");
         booleans = serializedObject.FindProperty("booleans");
+        storylines = serializedObject.FindProperty("storylines");
         if (interactables.arraySize == 0)
         {
             interactables.arraySize = 1;
@@ -35,6 +36,11 @@ public class InteractionManagerEditor : Editor
             interactions.GetArrayElementAtIndex(0).FindPropertyRelative("sentences").arraySize = 1;
             interactions.GetArrayElementAtIndex(0).FindPropertyRelative("sentences").GetArrayElementAtIndex(0).stringValue = "";
             interactions.GetArrayElementAtIndex(0).FindPropertyRelative("conditions").arraySize = booleans.arraySize;
+            interactions.GetArrayElementAtIndex(0).FindPropertyRelative("storylinesData").arraySize = storylines.arraySize;
+            interactions.GetArrayElementAtIndex(0).FindPropertyRelative("storylinesData").GetArrayElementAtIndex(0).FindPropertyRelative("isRequired").boolValue = false;
+            interactions.GetArrayElementAtIndex(0).FindPropertyRelative("storylinesData").GetArrayElementAtIndex(0).FindPropertyRelative("minStage").intValue = 1;
+            interactions.GetArrayElementAtIndex(0).FindPropertyRelative("storylinesData").GetArrayElementAtIndex(0).FindPropertyRelative("maxStage").intValue = 1;
+            interactions.GetArrayElementAtIndex(0).FindPropertyRelative("storylinesData").GetArrayElementAtIndex(0).intValue = 1;
             serializedObject.ApplyModifiedProperties();
         }
         if (showI.Length == 0)
@@ -122,6 +128,34 @@ public class InteractionManagerEditor : Editor
             PlusBooleanButton(maxWidth);
         }
         EditorGUILayout.Separator();
+        EditorGUILayout.LabelField("Storylines", EditorStyles.boldLabel);
+        for (int sIndex = 0; sIndex < storylines.arraySize; sIndex++)
+        {
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                SerializedProperty storylineName = storylines.GetArrayElementAtIndex(sIndex).FindPropertyRelative("name");
+                storylineName.stringValue = EditorGUILayout.DelayedTextField(storylineName.stringValue, GUILayout.MaxWidth(150f));
+                SerializedProperty storylineStages = storylines.GetArrayElementAtIndex(sIndex).FindPropertyRelative("stages");
+                GUILayout.FlexibleSpace();
+                EditorGUILayout.LabelField("Stages", GUILayout.MaxWidth(50f));
+                EditorGUILayout.IntSlider(storylineStages, 2, 20, GUIContent.none, GUILayout.MinWidth(80f), GUILayout.MaxWidth(180f));
+                if (storylineName.stringValue.Equals(""))
+                {
+                    storylines.DeleteArrayElementAtIndex(sIndex);
+                    for (int iIndex = 0; iIndex < interactables.arraySize; iIndex++)
+                    {
+                        SerializedProperty interactions = interactables.GetArrayElementAtIndex(iIndex).FindPropertyRelative("interactions");
+                        for (int actionIndex = 0; actionIndex < interactions.arraySize; actionIndex++)
+                        {
+                            interactions.GetArrayElementAtIndex(actionIndex).FindPropertyRelative("storylinesData").DeleteArrayElementAtIndex(sIndex);
+                        }
+                    }
+                }
+            }
+        }
+        PlusStorylineButton(150f);
+        EditorGUILayout.Separator();
+
         for (int iIndex = 0; iIndex < interactables.arraySize; iIndex++)
         {
             using (var rect = new EditorGUILayout.VerticalScope())
@@ -209,6 +243,58 @@ public class InteractionManagerEditor : Editor
                                 {
                                     booleansArray[bIndex] = booleans.GetArrayElementAtIndex(bIndex).FindPropertyRelative("name").stringValue;
                                 }
+                                EditorGUILayout.Separator();
+
+                                #region Storylines
+                                if (storylines.arraySize > 0)
+                                {
+                                    SerializedProperty storylinesData = interactions.GetArrayElementAtIndex(actionIndex).FindPropertyRelative("storylinesData");
+                                    using (new EditorGUILayout.VerticalScope(GUI.skin.box))
+                                    {
+                                        using (new EditorGUILayout.HorizontalScope())
+                                        {
+                                            EditorGUILayout.LabelField("", GUILayout.MaxWidth(160f));
+                                            GUILayout.FlexibleSpace();
+                                            EditorGUILayout.LabelField("Between Stages:", EditorStyles.boldLabel, GUILayout.MaxWidth(205f));
+                                            
+                                        }
+                                        for (int index = 0; index < storylines.arraySize; index++)
+                                        {
+                                            SerializedProperty storylineData = storylinesData.GetArrayElementAtIndex(index);
+                                            SerializedProperty isRequired = storylineData.FindPropertyRelative("isRequired");
+                                            SerializedProperty minStage = storylineData.FindPropertyRelative("minStage");
+                                            SerializedProperty maxStage = storylineData.FindPropertyRelative("maxStage");
+                                            SerializedProperty storyline = storylines.GetArrayElementAtIndex(index);
+                                            string label = storyline.FindPropertyRelative("name").stringValue;
+                                            int stages = storyline.FindPropertyRelative("stages").intValue;
+                                            
+                                            
+                                            
+                                            using (new EditorGUILayout.HorizontalScope())
+                                            {
+                                                EditorGUILayout.LabelField(label, GUILayout.MaxWidth(120f));
+                                                isRequired.boolValue = EditorGUILayout.Toggle(isRequired.boolValue, GUILayout.MaxWidth(40f));
+
+                                                GUILayout.FlexibleSpace();
+                                                using (new EditorGUI.DisabledScope(!isRequired.boolValue))
+                                                {
+                                                    minStage.intValue = EditorGUILayout.DelayedIntField(minStage.intValue, GUILayout.MaxWidth(40f));
+                                                    minStage.intValue = minStage.intValue > stages ? stages : minStage.intValue < 0 ? 0 : minStage.intValue;
+                                                    maxStage.intValue = maxStage.intValue < minStage.intValue ? minStage.intValue : maxStage.intValue;
+                                                    float min = minStage.intValue, max = maxStage.intValue;
+                                                    EditorGUILayout.MinMaxSlider(ref min, ref max, 0, stages, GUILayout.MaxWidth(200f));
+                                                    minStage.intValue = Mathf.RoundToInt(min);
+                                                    maxStage.intValue = Mathf.RoundToInt(max);
+                                                    maxStage.intValue = EditorGUILayout.DelayedIntField(maxStage.intValue, GUILayout.MaxWidth(40f));
+                                                    maxStage.intValue = maxStage.intValue > stages ? stages : maxStage.intValue < 0 ? 0 : maxStage.intValue;
+                                                    minStage.intValue = minStage.intValue > maxStage.intValue ? maxStage.intValue : minStage.intValue;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }                               
+                                #endregion
+
                                 EditorGUILayout.Separator();
 
                                 #region Conditions                                
@@ -434,6 +520,29 @@ public class InteractionManagerEditor : Editor
                 }
             }
 
+        }
+    }
+
+    private void PlusStorylineButton(float maxWidth)
+    {
+        if (GUILayout.Button(new GUIContent("+"), GUILayout.MaxWidth(maxWidth)))
+        {
+            storylines.arraySize++;
+            storylines.GetArrayElementAtIndex(storylines.arraySize - 1).FindPropertyRelative("name").stringValue = "storyline";
+            storylines.GetArrayElementAtIndex(storylines.arraySize - 1).FindPropertyRelative("stages").intValue = 2;
+            storylines.GetArrayElementAtIndex(storylines.arraySize - 1).FindPropertyRelative("currentStage").intValue = 0;
+            for (int iIndex = 0; iIndex < interactables.arraySize; iIndex++)
+            {
+                SerializedProperty interactions = interactables.GetArrayElementAtIndex(iIndex).FindPropertyRelative("interactions");
+                for (int dIndex = 0; dIndex < interactions.arraySize; dIndex++)
+                {
+                    SerializedProperty storylinesData = interactions.GetArrayElementAtIndex(dIndex).FindPropertyRelative("storylinesData");
+                    storylinesData.arraySize++;
+                    storylinesData.GetArrayElementAtIndex(storylinesData.arraySize - 1).FindPropertyRelative("isRequired").boolValue = false;
+                    storylinesData.GetArrayElementAtIndex(storylinesData.arraySize - 1).FindPropertyRelative("minStage").intValue = 1;
+                    storylinesData.GetArrayElementAtIndex(storylinesData.arraySize - 1).FindPropertyRelative("maxStage").intValue = 1;
+                }
+            }
         }
     }
 

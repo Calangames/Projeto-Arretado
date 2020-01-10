@@ -11,6 +11,7 @@ public class InteractionManager : MonoBehaviour
     public Image actionImage, mouseHudImage;
     public Animator animator;
     public List<Boolean> booleans;
+    public List<Storyline> storylines;
 
     public static InteractionManager instance = null;
     //Adding a static (if possible) dictonary of <int sceneIndex, InteractionManager instance> should work for multiple scenes
@@ -42,6 +43,18 @@ public class InteractionManager : MonoBehaviour
         Nameplates = new Queue<string>();
         Sentences = new Queue<string>();
         StoredInteractable = null;
+    }
+
+    public void AdvanceStoryline(string storylineName)
+    {
+        foreach (Storyline storyline in storylines)
+        {
+            if (storyline.name.Equals(storylineName))
+            {
+                storyline.currentStage++;
+                return;
+            }
+        }
     }
 
     public void ChangeBoolToFalse(string boolName)
@@ -79,7 +92,7 @@ public class InteractionManager : MonoBehaviour
                     StoredInteractable = interactable;
                     for (int i = interactable.interactions.Count - 1; i >= 0; i--)
                     {
-                        if (FulfillConditions(interactable.interactions[i].conditions))
+                        if (FulfillConditions(interactable.interactions[i]))
                         {
                             actionImage.sprite = interactable.interactions[i].actionSprite;
                             actionImage.enabled = true;
@@ -99,7 +112,7 @@ public class InteractionManager : MonoBehaviour
             {
                 for (int i = StoredInteractable.interactions.Count - 1; i >= 0; i--)
                 {
-                    if (FulfillConditions(StoredInteractable.interactions[i].conditions))
+                    if (FulfillConditions(StoredInteractable.interactions[i]))
                     {
                         actionImage.sprite = StoredInteractable.interactions[i].actionSprite;
                         actionImage.enabled = true;
@@ -130,7 +143,7 @@ public class InteractionManager : MonoBehaviour
         {
             for (int i = StoredInteractable.interactions.Count - 1; i >= 0; i--)
             {
-                if (FulfillConditions(StoredInteractable.interactions[i].conditions))
+                if (FulfillConditions(StoredInteractable.interactions[i]))
                 {
                     StoredInteractable.interactions[i].functions.Invoke();
                     storedFunctionsAfterDialogue = StoredInteractable.interactions[i].functionsAfterDialogue;
@@ -162,7 +175,7 @@ public class InteractionManager : MonoBehaviour
             {
                 for (int i = interactable.interactions.Count - 1; i >= 0; i--)
                 {
-                    if (FulfillConditions(interactable.interactions[i].conditions))
+                    if (FulfillConditions(interactable.interactions[i]))
                     {
                         interactable.interactions[i].functions.Invoke();
                         storedFunctionsAfterDialogue = interactable.interactions[i].functionsAfterDialogue;
@@ -183,15 +196,25 @@ public class InteractionManager : MonoBehaviour
         EndDialogue();
     }
 
-    private bool FulfillConditions(List<int> conditions)
+    private bool FulfillConditions(Interactable.Interaction interaction)
     {
-        for (int i = 0; i < conditions.Count; i++)
+        for (int i = 0; i < storylines.Count; i++)
         {
-            if (conditions[i] == -1 && booleans[i].value)
+            if (interaction.storylinesData[i].isRequired)
+            {
+                if (storylines[i].currentStage < interaction.storylinesData[i].minStage || storylines[i].currentStage > interaction.storylinesData[i].maxStage)
+                {
+                    return false;
+                }                
+            }
+        }
+        for (int i = 0; i < interaction.conditions.Count; i++)
+        {
+            if (interaction.conditions[i] == -1 && booleans[i].value)
             {
                 return false;
             }
-            else if (conditions[i] == 1 && !booleans[i].value)
+            else if (interaction.conditions[i] == 1 && !booleans[i].value)
             {
                 return false;
             }
@@ -305,6 +328,21 @@ public class Boolean
 }
 
 [System.Serializable]
+public class Storyline
+{
+    public string name;
+    public int stages;
+    public int currentStage;
+
+    public Storyline(string name, int stages, int currentStage)
+    {
+        this.name = name;
+        this.stages = stages;
+        this.currentStage = currentStage;
+    }
+}
+
+[System.Serializable]
 public class Interactable
 {
     public GameObject iGameObject;
@@ -325,6 +363,21 @@ public class Interactable
         [TextArea(1, 10)]
         public string[] sentences;
         public UnityEvent functions, functionsAfterDialogue;
-        public List<int> conditions = new List<int>();        
+        public List<int> conditions = new List<int>();
+        public List<StorylineData> storylinesData = new List<StorylineData>();
+
+        [System.Serializable]
+        public class StorylineData
+        {
+            public bool isRequired;
+            public int minStage, maxStage;
+
+            public StorylineData(bool isRequired, int minStage, int maxStage)
+            {
+                this.isRequired = isRequired;
+                this.minStage = minStage;
+                this.maxStage = maxStage;
+            }
+        }
     }
 }

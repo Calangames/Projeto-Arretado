@@ -11309,18 +11309,16 @@ MonoBehaviour:
   booleans:
   - name: Procurando Chave
     value: 0
-  - name: Falou com Bebel
-    value: 0
-  - name: Falou com Carl
-    value: 0
-  - name: crush choice
-    value: 0
   - name: Chiclete p/ Carl
     value: 0
   - name: Chiclete p/ Bebel
     value: 0
   - name: pasta top
     value: 0
+  storylines:
+  - name: Crush Choice
+    stages: 3
+    currentStage: 0
   interactables:
   - iGameObject: {fileID: 1585809014}
     tag: Untagged
@@ -11349,7 +11347,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000000000000000000000000000000000000000000000000000
+      conditions: 00000000000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
   - iGameObject: {fileID: 989626581}
     tag: Untagged
     texture: {fileID: 2800000, guid: 873afc1a48126fb4ea96728fc96e0c10, type: 3}
@@ -11385,7 +11387,11 @@ MonoBehaviour:
               m_StringArgument: Procurando Chave
               m_BoolArgument: 0
             m_CallState: 2
-      conditions: ffffffff000000000000000000000000000000000000000000000000
+      conditions: ffffffff000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
     - description: era oq mesmo?
       actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
       nameplates:
@@ -11398,7 +11404,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 01000000000000000000000000000000000000000000000000000000
+      conditions: 01000000000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
   - iGameObject: {fileID: 206580811}
     tag: Untagged
     texture: {fileID: 2800000, guid: 6f800e632e239934c917b4a4ac0f2735, type: 3}
@@ -11429,7 +11439,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 01000000000000000000000000000000000000000000000000000000
+      conditions: 01000000000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
     - description: 'crush chicletes '
       actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
       nameplates:
@@ -11450,17 +11464,21 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 1277341651}
-            m_MethodName: ChangeBoolToTrue
+            m_MethodName: AdvanceStoryline
             m_Mode: 5
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
-              m_StringArgument: crush choice
+              m_StringArgument: Crush Choice
               m_BoolArgument: 0
             m_CallState: 2
-      conditions: 000000000100000001000000ffffffff000000000000000000000000
+      conditions: 00000000000000000000000000000000
+      storylinesData:
+      - isRequired: 1
+        minStage: 2
+        maxStage: 2
   - iGameObject: {fileID: 1967279902}
     tag: Untagged
     texture: {fileID: 2800000, guid: 9dab73769a975c443b6744f5c6bba3e8, type: 3}
@@ -11480,7 +11498,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000000000000000000000000000000000000000000000000000
+      conditions: 00000000000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
   - iGameObject: {fileID: 832751151}
     tag: Untagged
     texture: {fileID: 2800000, guid: 5ea8e8bca04241b43bbb0f03819b8c60, type: 3}
@@ -11500,7 +11522,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000000000000000000000000000000000000000000000000000
+      conditions: 00000000000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
   - iGameObject: {fileID: 931102052}
     tag: Untagged
     texture: {fileID: 2800000, guid: 4b4a2e8fd69901b4db7f6c7de00aba8a, type: 3}
@@ -11525,17 +11551,21 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 1277341651}
-            m_MethodName: ChangeBoolToTrue
+            m_MethodName: AdvanceStoryline
             m_Mode: 5
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
-              m_StringArgument: Falou com Bebel
+              m_StringArgument: Crush Choice
               m_BoolArgument: 0
             m_CallState: 2
-      conditions: 00000000ffffffffffffffffffffffffffffffffffffffff00000000
+      conditions: 00000000ffffffffffffffff00000000
+      storylinesData:
+      - isRequired: 1
+        minStage: 0
+        maxStage: 0
     - description: chiclets pro carl
       actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
       nameplates:
@@ -11553,7 +11583,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 0000000001000000010000000100000001000000ffffffff00000000
+      conditions: 0000000001000000ffffffff00000000
+      storylinesData:
+      - isRequired: 1
+        minStage: 3
+        maxStage: 3
     - description: chiclets pra bebel
       actionSprite: {fileID: 21300000, guid: 5e88e56f10eedb74597f3216ab451433, type: 3}
       nameplates:
@@ -11582,7 +11616,11 @@ MonoBehaviour:
               m_StringArgument: Chiclete p/ Bebel
               m_BoolArgument: 0
             m_CallState: 2
-      conditions: 00000000010000000100000001000000ffffffffffffffff00000000
+      conditions: 00000000ffffffffffffffff00000000
+      storylinesData:
+      - isRequired: 1
+        minStage: 3
+        maxStage: 3
   - iGameObject: {fileID: 754421946}
     tag: Untagged
     texture: {fileID: 2800000, guid: 7cdbf618743a1a74da8d43429cdb37b7, type: 3}
@@ -11611,17 +11649,21 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 1277341651}
-            m_MethodName: ChangeBoolToTrue
+            m_MethodName: AdvanceStoryline
             m_Mode: 5
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
-              m_StringArgument: Falou com Carl
+              m_StringArgument: Crush Choice
               m_BoolArgument: 0
             m_CallState: 2
-      conditions: 0000000001000000ffffffffffffffffffffffffffffffff00000000
+      conditions: 00000000ffffffffffffffff00000000
+      storylinesData:
+      - isRequired: 1
+        minStage: 1
+        maxStage: 1
     - description: chiclets pro carl
       actionSprite: {fileID: 21300000, guid: 5e88e56f10eedb74597f3216ab451433, type: 3}
       nameplates:
@@ -11647,7 +11689,11 @@ MonoBehaviour:
               m_StringArgument: Chiclete p/ Carl
               m_BoolArgument: 0
             m_CallState: 2
-      conditions: 00000000010000000100000001000000ffffffffffffffff00000000
+      conditions: 00000000ffffffffffffffff00000000
+      storylinesData:
+      - isRequired: 1
+        minStage: 3
+        maxStage: 3
     - description: chiclets pra bebel
       actionSprite: {fileID: 21300000, guid: 28d7dde21483f674f9d9465b50ca2eae, type: 3}
       nameplates:
@@ -11662,7 +11708,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000010000000100000001000000ffffffff0100000000000000
+      conditions: 00000000ffffffff0100000000000000
+      storylinesData:
+      - isRequired: 1
+        minStage: 3
+        maxStage: 3
   - iGameObject: {fileID: 1752696129}
     tag: Untagged
     texture: {fileID: 2800000, guid: e18e44008d48e0f42b2d452c5a6996df, type: 3}
@@ -11697,7 +11747,11 @@ MonoBehaviour:
               m_StringArgument: pasta top
               m_BoolArgument: 0
             m_CallState: 2
-      conditions: 000000000000000000000000000000000000000000000000ffffffff
+      conditions: 000000000000000000000000ffffffff
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
   - iGameObject: {fileID: 133995285}
     tag: Untagged
     texture: {fileID: 2800000, guid: 7cdeb1d70f299dd498aed9f0c04531a3, type: 3}
@@ -11717,7 +11771,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000000000000000000000000000000000000000000000000000
+      conditions: 00000000000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
   - iGameObject: {fileID: 532556520}
     tag: Untagged
     texture: {fileID: 2800000, guid: 53f5fd83f0d8b464a850db95e51eec1a, type: 3}
@@ -11737,7 +11795,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000000000000000000000000000000000000000000000000000
+      conditions: 00000000000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
   - iGameObject: {fileID: 1296188931}
     tag: Untagged
     texture: {fileID: 2800000, guid: 72066326ac69c8b4d8d3640a99dd07e8, type: 3}
@@ -11768,7 +11830,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000000000000000000000000000000000000000000000000000
+      conditions: 00000000000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
   - iGameObject: {fileID: 532725854}
     tag: Untagged
     texture: {fileID: 2800000, guid: f9c89c4a3bc08e7418af6c4dfd87883b, type: 3}
@@ -11788,7 +11854,11 @@ MonoBehaviour:
       functionsAfterDialogue:
         m_PersistentCalls:
           m_Calls: []
-      conditions: 00000000000000000000000000000000000000000000000000000000
+      conditions: 00000000000000000000000000000000
+      storylinesData:
+      - isRequired: 0
+        minStage: 1
+        maxStage: 1
 --- !u!4 &1277341652
 Transform:
   m_ObjectHideFlags: 0
